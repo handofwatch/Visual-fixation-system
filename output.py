@@ -4,7 +4,7 @@ Created on Fri Aug  9 20:40:03 2019
 
 @author: lc
 """
-import interface as i
+import extract.interface as i
 import ReturnData as r
 
 video_path='C:/Users/lc/Desktop/Cirtus/input/test.mp4'

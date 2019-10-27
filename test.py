@@ -18,11 +18,11 @@ import lib.utils.data as torchdata
 import cv2
 from tqdm import tqdm
 from config import cfg
-import extract_frame
+from extract import interface
 
-colors = loadmat('data/color150.mat')['colors']
+colors = loadmat('../data/color150.mat')['colors']
 names = {}
-with open('data/object150_info.csv') as f:
+with open('../data/object150_info.csv') as f:
     reader = csv.reader(f)
     next(reader)
     for row in reader:
@@ -60,7 +60,7 @@ def visualize_result(data, pred, cfg):
     cv2.imwrite(os.path.join(result_path,img_name.replace('.jpg', '.png')), im_vis)
 
 
-def test(segmentation_module, loader, gpu):
+def test(segmentation_module, loader):
     segmentation_module.eval()
 
     pbar = tqdm(total=len(loader))
@@ -99,7 +99,7 @@ def test(segmentation_module, loader, gpu):
         pbar.update(1)
 
 
-def main(cfg, gpu):
+def main(cfg):
     #torch.cuda.set_device(gpu)
 
     # Network Builders
@@ -134,7 +134,7 @@ def main(cfg, gpu):
     #segmentation_module.cuda()
 
     # Main loop
-    test(segmentation_module, loader_test, gpu)
+    test(segmentation_module, loader_test)
 
     print('Inference done!')
 
@@ -189,28 +189,32 @@ if __name__ == '__main__':
     # absolute paths of model weights
     print("before assign weights " + cfg.DIR)
     cfg.MODEL.weights_encoder = os.path.join(
-        cfg.DIR, 'encoder' + cfg.TEST.suffix)
+        '../' + cfg.DIR, 'encoder' + cfg.TEST.suffix)
     cfg.MODEL.weights_decoder = os.path.join(
-        cfg.DIR, 'decoder' + cfg.TEST.suffix)
+       '../' + cfg.DIR, 'decoder' + cfg.TEST.suffix)
 
-    print("===================")
-    print(cfg.MODEL.weights_encoder)
+    # print("==========another test==============")
+    # print()
+    # print("===================")
+    # print(cfg.MODEL.weights_encoder)
+    # print(cfg.MODEL.weights_decoder)
 
     assert os.path.exists(cfg.MODEL.weights_encoder) and \
-        os.path.exists(cfg.MODEL.weights_decoder), "checkpoint does not exitst!"
+        os.path.exists(cfg.MODEL.weights_decoder), "checkpoint does not exits!"
 
     # generate testing image list
-    print("===================")
-    print(args.imgs)
+    # print("===================")
+    # print(args.imgs)
     if(".mp4" in args.imgs):
-        print (os.path.dirname(args.imgs))
+        print(os.path.dirname(args.imgs))
         result_path = os.path.join(os.path.dirname(args.imgs), "images")
-        extract_frame.extract_frame(args.imgs, result_path)
+        # extract_frame.extract_frame(args.imgs, result_path)
+        # interface.analysis_for_video(args.imgs)
         args.imgs = result_path
 
     if os.path.isdir(args.imgs):
-        print("===========")
-        print("is dir")
+        # print("===========")
+        # print("is dir")
         imgs = find_recursive(args.imgs)
     else:
         imgs = [args.imgs]
@@ -218,11 +222,11 @@ if __name__ == '__main__':
     assert len(imgs), "imgs should be a path to image (.jpg) or directory."
     cfg.list_test = [{'fpath_img': x} for x in imgs]
 
-    print("=============== result DIR")
-    print(cfg.TEST.result)
-    print(os.getcwd())
-    print(os.path.samefile(cfg.TEST.result,os.getcwd()))
+    # print("=============== result DIR")
+    # print(cfg.TEST.result)
+    # print(os.getcwd())
+    # print(os.path.samefile(cfg.TEST.result, os.getcwd()))
     if not os.path.isdir(cfg.TEST.result):
         os.makedirs(cfg.TEST.result)
 
-    main(cfg, args.gpu)
+    main(cfg)

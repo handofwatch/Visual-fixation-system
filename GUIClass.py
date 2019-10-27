@@ -4,7 +4,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtChart import *
 from PyQt5.QtCore import *
 from functools import partial
-import interface as i
+import extract.interface as i
 import ReturnData as r
 import os
 
