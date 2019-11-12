@@ -4,3 +4,4 @@ ckpt/
 vis/
 log/
 pretrained/
+.DS_Store
