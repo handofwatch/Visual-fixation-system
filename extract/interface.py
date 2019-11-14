@@ -87,7 +87,7 @@ def switch_case(choose, path, result_path):
                 jpg_quality=100,
             )
     if choose == "4":
-        print("do you want to input the start time and the finish time you like?(yes or no)")
+        print("do you want to output the start time and the finish time you like?(yes or no)")
         str_ = input()
         if str_ == "yes":
             print("start_time (s): ")
@@ -121,9 +121,9 @@ def switch_case(choose, path, result_path):
                 output_prefix='extract',
                 jpg_quality=100,
             )
-    print("This is time_list")
+    print("This is time_list:")
     print(time_list)
 
 
 if __name__ == '__main__':
-    analysis_for_video("/Users/apple/Documents/GitHub/Visual-fixation-system/input/test.mp4")
+    analysis_for_video("/Users/apple/Documents/GitHub/Visual-fixation-system/output/test.mp4")

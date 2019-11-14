@@ -18,7 +18,6 @@ import lib.utils.data as torchdata
 import cv2
 from tqdm import tqdm
 from config import cfg
-from extract import interface
 
 colors = loadmat('../data/color150.mat')['colors']
 names = {}
@@ -31,7 +30,9 @@ with open('../data/object150_info.csv') as f:
 
 def visualize_result(data, pred, cfg):
     (img, info) = data
-
+    csv_file = open("../output/rate.csv", 'w')
+    writer = csv.writer(csv_file)
+    writer.writerow(["name", "ratio"])
     # print predictions in descending order
     pred = np.int32(pred)
     pixs = pred.size
@@ -42,6 +43,8 @@ def visualize_result(data, pred, cfg):
         ratio = counts[idx] / pixs * 100
         if ratio > 0.1:
             print("  {}: {:.2f}%".format(name, ratio))
+            writer.writerow([name, round(ratio, 2)])
+    csv_file.close()
 
     # colorize prediction
     pred_color = colorEncode(pred, colors).astype(np.uint8)
@@ -50,14 +53,12 @@ def visualize_result(data, pred, cfg):
     im_vis = np.concatenate((img, pred_color), axis=1)
 
     img_name = info.split('\\')[-1]
-    #print (cfg.TEST.result)
-    #print (img_name)
-    #print (os.path.join(cfg.TEST.result,img_name.replace('.jpg', '.png')))
     result_path = os.path.join(os.path.dirname(info), "results")
+    print("Result_path {{}}:".format(result_path))
     if not os.path.exists(result_path):
         os.makedirs(result_path)
     
-    cv2.imwrite(os.path.join(result_path,img_name.replace('.jpg', '.png')), im_vis)
+    cv2.imwrite(os.path.join(result_path, img_name.replace('.jpg', '.png')), im_vis)
 
 
 def test(segmentation_module, loader):
@@ -173,8 +174,8 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
 
-    print(args.opts)
-    print("before merge: " + cfg.DIR)
+    # print(args.opts)
+    # print("before merge: " + cfg.DIR)
     cfg.merge_from_file(args.cfg)
     cfg.merge_from_list(args.opts)
     # cfg.freeze()
@@ -187,34 +188,21 @@ if __name__ == '__main__':
     cfg.MODEL.arch_decoder = cfg.MODEL.arch_decoder.lower()
 
     # absolute paths of model weights
-    print("before assign weights " + cfg.DIR)
+    # print("before assign weights " + cfg.DIR)
     cfg.MODEL.weights_encoder = os.path.join(
         '../' + cfg.DIR, 'encoder' + cfg.TEST.suffix)
     cfg.MODEL.weights_decoder = os.path.join(
        '../' + cfg.DIR, 'decoder' + cfg.TEST.suffix)
 
-    # print("==========another test==============")
-    # print()
-    # print("===================")
-    # print(cfg.MODEL.weights_encoder)
-    # print(cfg.MODEL.weights_decoder)
-
     assert os.path.exists(cfg.MODEL.weights_encoder) and \
         os.path.exists(cfg.MODEL.weights_decoder), "checkpoint does not exits!"
 
-    # generate testing image list
-    # print("===================")
-    # print(args.imgs)
-    if(".mp4" in args.imgs):
-        print(os.path.dirname(args.imgs))
-        result_path = os.path.join(os.path.dirname(args.imgs), "images")
-        # extract_frame.extract_frame(args.imgs, result_path)
-        # interface.analysis_for_video(args.imgs)
-        args.imgs = result_path
+    # if(".mp4" in args.imgs):
+    #     print(os.path.dirname(args.imgs))
+    #     result_path = os.path.join(os.path.dirname(args.imgs), "images")
+    #     args.imgs = result_path
 
     if os.path.isdir(args.imgs):
-        # print("===========")
-        # print("is dir")
         imgs = find_recursive(args.imgs)
     else:
         imgs = [args.imgs]
@@ -222,10 +210,6 @@ if __name__ == '__main__':
     assert len(imgs), "imgs should be a path to image (.jpg) or directory."
     cfg.list_test = [{'fpath_img': x} for x in imgs]
 
-    # print("=============== result DIR")
-    # print(cfg.TEST.result)
-    # print(os.getcwd())
-    # print(os.path.samefile(cfg.TEST.result, os.getcwd()))
     if not os.path.isdir(cfg.TEST.result):
         os.makedirs(cfg.TEST.result)
 

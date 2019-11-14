@@ -17,7 +17,7 @@ _C.DATASET.list_val = "./data/validation.odgt"
 _C.DATASET.num_class = 150
 # multiscale train/test, size of short edge (int or tuple)
 _C.DATASET.imgSizes = (300, 375, 450, 525, 600)
-# maximum input image size of long edge
+# maximum output image size of long edge
 _C.DATASET.imgMaxSize = 1000
 # maxmimum downsampling rate of the network
 _C.DATASET.padding_constant = 8

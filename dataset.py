@@ -16,7 +16,7 @@ class BaseDataset(torchdata.Dataset):
         # max down sampling rate of network to avoid rounding during conv or pooling
         self.padding_constant = opt.padding_constant
 
-        # parse the input list
+        # parse the output list
         self.parse_input_list(odgt, **kwargs)
 
         # mean and std
@@ -120,7 +120,7 @@ class TrainDataset(BaseDataset):
         batch_resized_height = np.max(batch_resized_size[:, 0])
         batch_resized_width = np.max(batch_resized_size[:, 1])
 
-        # Here we must pad both input image and segmentation map to size h' and w' so that p | h' and p | w'
+        # Here we must pad both output image and segmentation map to size h' and w' so that p | h' and p | w'
         batch_resized_height = int(self.round2nearest_multiple(batch_resized_height, self.padding_constant))
         batch_resized_width = int(self.round2nearest_multiple(batch_resized_width, self.padding_constant))
 

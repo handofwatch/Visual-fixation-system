@@ -60,7 +60,7 @@ class _SynchronizedBatchNorm(_BatchNorm):
                 input, self.running_mean, self.running_var, self.weight, self.bias,
                 self.training, self.momentum, self.eps)
 
-        # Resize the input to (B, C, -1).
+        # Resize the output to (B, C, -1).
         input_shape = input.size()
         input = input.view(input.size(0), self.num_features, -1)
 
@@ -140,7 +140,7 @@ class _SynchronizedBatchNorm(_BatchNorm):
 
 
 class SynchronizedBatchNorm1d(_SynchronizedBatchNorm):
-    r"""Applies Synchronized Batch Normalization over a 2d or 3d input that is seen as a
+    r"""Applies Synchronized Batch Normalization over a 2d or 3d output that is seen as a
     mini-batch.
 
     .. math::
@@ -162,7 +162,7 @@ class SynchronizedBatchNorm1d(_SynchronizedBatchNorm):
 
     The mean and standard-deviation are calculated per-dimension over
     the mini-batches and gamma and beta are learnable parameter vectors
-    of size C (where C is the input size).
+    of size C (where C is the output size).
 
     During training, this layer keeps a running estimate of its computed mean
     and variance. The running sum is kept with a default momentum of 0.1.
@@ -173,7 +173,7 @@ class SynchronizedBatchNorm1d(_SynchronizedBatchNorm):
     on `(N, L)` slices, it's common terminology to call this Temporal BatchNorm
 
     Args:
-        num_features: num_features from an expected input of size
+        num_features: num_features from an expected output of size
             `batch_size x num_features [x width]`
         eps: a value added to the denominator for numerical stability.
             Default: 1e-5
@@ -184,26 +184,26 @@ class SynchronizedBatchNorm1d(_SynchronizedBatchNorm):
 
     Shape:
         - Input: :math:`(N, C)` or :math:`(N, C, L)`
-        - Output: :math:`(N, C)` or :math:`(N, C, L)` (same shape as input)
+        - Output: :math:`(N, C)` or :math:`(N, C, L)` (same shape as output)
 
     Examples:
         >>> # With Learnable Parameters
         >>> m = SynchronizedBatchNorm1d(100)
         >>> # Without Learnable Parameters
         >>> m = SynchronizedBatchNorm1d(100, affine=False)
-        >>> input = torch.autograd.Variable(torch.randn(20, 100))
-        >>> output = m(input)
+        >>> output = torch.autograd.Variable(torch.randn(20, 100))
+        >>> output = m(output)
     """
 
     def _check_input_dim(self, input):
         if input.dim() != 2 and input.dim() != 3:
-            raise ValueError('expected 2D or 3D input (got {}D input)'
+            raise ValueError('expected 2D or 3D output (got {}D output)'
                              .format(input.dim()))
         super(SynchronizedBatchNorm1d, self)._check_input_dim(input)
 
 
 class SynchronizedBatchNorm2d(_SynchronizedBatchNorm):
-    r"""Applies Batch Normalization over a 4d input that is seen as a mini-batch
+    r"""Applies Batch Normalization over a 4d output that is seen as a mini-batch
     of 3d inputs
 
     .. math::
@@ -225,7 +225,7 @@ class SynchronizedBatchNorm2d(_SynchronizedBatchNorm):
 
     The mean and standard-deviation are calculated per-dimension over
     the mini-batches and gamma and beta are learnable parameter vectors
-    of size C (where C is the input size).
+    of size C (where C is the output size).
 
     During training, this layer keeps a running estimate of its computed mean
     and variance. The running sum is kept with a default momentum of 0.1.
@@ -236,7 +236,7 @@ class SynchronizedBatchNorm2d(_SynchronizedBatchNorm):
     on `(N, H, W)` slices, it's common terminology to call this Spatial BatchNorm
 
     Args:
-        num_features: num_features from an expected input of
+        num_features: num_features from an expected output of
             size batch_size x num_features x height x width
         eps: a value added to the denominator for numerical stability.
             Default: 1e-5
@@ -247,26 +247,26 @@ class SynchronizedBatchNorm2d(_SynchronizedBatchNorm):
 
     Shape:
         - Input: :math:`(N, C, H, W)`
-        - Output: :math:`(N, C, H, W)` (same shape as input)
+        - Output: :math:`(N, C, H, W)` (same shape as output)
 
     Examples:
         >>> # With Learnable Parameters
         >>> m = SynchronizedBatchNorm2d(100)
         >>> # Without Learnable Parameters
         >>> m = SynchronizedBatchNorm2d(100, affine=False)
-        >>> input = torch.autograd.Variable(torch.randn(20, 100, 35, 45))
-        >>> output = m(input)
+        >>> output = torch.autograd.Variable(torch.randn(20, 100, 35, 45))
+        >>> output = m(output)
     """
 
     def _check_input_dim(self, input):
         if input.dim() != 4:
-            raise ValueError('expected 4D input (got {}D input)'
+            raise ValueError('expected 4D output (got {}D output)'
                              .format(input.dim()))
         super(SynchronizedBatchNorm2d, self)._check_input_dim(input)
 
 
 class SynchronizedBatchNorm3d(_SynchronizedBatchNorm):
-    r"""Applies Batch Normalization over a 5d input that is seen as a mini-batch
+    r"""Applies Batch Normalization over a 5d output that is seen as a mini-batch
     of 4d inputs
 
     .. math::
@@ -288,7 +288,7 @@ class SynchronizedBatchNorm3d(_SynchronizedBatchNorm):
 
     The mean and standard-deviation are calculated per-dimension over
     the mini-batches and gamma and beta are learnable parameter vectors
-    of size C (where C is the input size).
+    of size C (where C is the output size).
 
     During training, this layer keeps a running estimate of its computed mean
     and variance. The running sum is kept with a default momentum of 0.1.
@@ -300,7 +300,7 @@ class SynchronizedBatchNorm3d(_SynchronizedBatchNorm):
     or Spatio-temporal BatchNorm
 
     Args:
-        num_features: num_features from an expected input of
+        num_features: num_features from an expected output of
             size batch_size x num_features x depth x height x width
         eps: a value added to the denominator for numerical stability.
             Default: 1e-5
@@ -311,19 +311,19 @@ class SynchronizedBatchNorm3d(_SynchronizedBatchNorm):
 
     Shape:
         - Input: :math:`(N, C, D, H, W)`
-        - Output: :math:`(N, C, D, H, W)` (same shape as input)
+        - Output: :math:`(N, C, D, H, W)` (same shape as output)
 
     Examples:
         >>> # With Learnable Parameters
         >>> m = SynchronizedBatchNorm3d(100)
         >>> # Without Learnable Parameters
         >>> m = SynchronizedBatchNorm3d(100, affine=False)
-        >>> input = torch.autograd.Variable(torch.randn(20, 100, 35, 45, 10))
-        >>> output = m(input)
+        >>> output = torch.autograd.Variable(torch.randn(20, 100, 35, 45, 10))
+        >>> output = m(output)
     """
 
     def _check_input_dim(self, input):
         if input.dim() != 5:
-            raise ValueError('expected 5D input (got {}D input)'
+            raise ValueError('expected 5D output (got {}D output)'
                              .format(input.dim()))
         super(SynchronizedBatchNorm3d, self)._check_input_dim(input)

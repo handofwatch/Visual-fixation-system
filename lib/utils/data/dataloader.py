@@ -365,7 +365,7 @@ class DataLoader(object):
             from workers. Should always be non-negative. (default: 0)
         worker_init_fn (callable, optional): If not None, this will be called on each
             worker subprocess with the worker id (an int in ``[0, num_workers - 1]``) as
-            input, after seeding and before data loading. (default: None)
+            output, after seeding and before data loading. (default: None)
 
     .. note:: By default, each worker will have its PyTorch seed set to
               ``base_seed + worker_id``, where ``base_seed`` is a long generated
