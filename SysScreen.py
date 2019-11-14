@@ -3,47 +3,29 @@ from flask import render_template
 from flask import request
 from templates.UiBar import UiBar
 from templates.UiPie import UiPie
-import extract.interface as i
-import csv
-
+import os
 
 app = Flask(__name__)
 
+UPLOAD_FOLDER = 'upload'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 app.config['SECRET_KEY'] = 'secret string'
 
-
-@app.route('/', methods=['GET', 'POST'])
-def sys_screen():
-    name = []
-    data = []
-    if request.method == 'POST':
-        with open('../output/rate.csv') as f:
-            reader = csv.reader(f)
-            print("====reader++++")
-            print(reader)
-            next(reader)
-            for row in reader:
-                name.append(row['name'])
-            print(name)
-            print(data)
-        ui_bar(name, data)
-        ui_pie(name, data)
-        return render_template('Result.html')
-
+@app.route('/', methods =['GET', 'POST'])
+def sysScreen():
     return render_template('MainScreen.html')
 
+def uibar(name, data):
 
-def ui_bar(name, data):
-
-    _picture = UiBar()
+    picture = UiBar()
     picture.bar(name, data)
 
+def uipie(name, data):
 
-def ui_pie(name, data):
-
-    _picture = UiPie()
+    picture = UiPie()
     picture.pie(name, data)
-
 
 @app.route('/Result', methods =['POST'])
 def picture():
@@ -57,7 +39,32 @@ def picture():
         if id == 'pie':
             return render_template('pie.html')
 
+@app.route('/uploadFile', methods =['POST'])
+def uploadFile():
+    if request.method == 'POST':
+        videoFile = request.files['video']
+        rDataFile = request.files['rData']
+        lDataFile = request.files['lData']
+        file_dir = os.path.join(basedir, app.config['UPLOAD_FOLDER'])
+        videoFile.save(os.path.join(file_dir, 'videoFile'))
+        rDataFile.save(os.path.join(file_dir, 'rDataFile'))
+        lDataFile.save(os.path.join(file_dir, 'lDataFile'))
+        name = []
+        data = []
 
-if __name__ == '__main__':
-    app.debug = True
-    app.run()
+#请修改这里
+        resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
+                     'person;individual;someone;somebody;mortal;soul': 6,
+                     'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
+    #返回一个字典resultSum，当中注视点种类为键，注视点数量为值
+        for i in resultSum:
+            name.append(i)
+            data.append(resultSum[i])
+        uibar(name, data)
+        uipie(name, data)
+        return render_template('Result.html')
+
+    return render_template('MainScreen.html')
+
+
+

@@ -1,28 +1,8 @@
 <!DOCTYPE html >
-<form method='post' > <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    视频地址:<input type="file" name="video"><br>
-    右眼眼动数据地址:<input type="file" name="rData">
-    左眼眼动数据地址:<input type="file" name="lData">
+<form action="/uploadFile" method='post' enctype="multipart/form-data">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    视频地址:<input type="file" name="video" id="videoFile"><br>
+    右眼眼动数据地址:<input type="file" name="rData" id="rDataFile">
+    左眼眼动数据地址:<input type="file" name="lData" id="lDataFile">
     <input type="submit" name="analysis">
 </form>
-
-<script>
-function getFileURL(file) {
-var getUrl = null;
-if (window.createObjectURL != undefined) {
-getUrl = window.createObjectURL(file);
-}
-else if (window.URL != undefined) {
-getUrl = window.URL.createObjectURL(file);
-}
-else if (window.webkitURL != undefined) {
-getUrl = window.webkitURL.createObjectURL(file);
-}
-return getUrl;
-var videoPath = getFileURL(video)
-var rDataPath = getFileURL(rData)
-var lDataPath = getFileURL(lData)
-console.log(videoPath)
-console.log(rDataPath)
-console.log(lDataPath)
-}</script>
