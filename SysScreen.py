@@ -4,6 +4,7 @@ from flask import request
 from templates.UiBar import UiBar
 from templates.UiPie import UiPie
 import os
+from extract.interface import *
 
 app = Flask(__name__)
 
@@ -22,10 +23,13 @@ def uibar(name, data):
     picture = UiBar()
     picture.bar(name, data)
 
+
 def uipie(name, data):
 
     picture = UiPie()
     picture.pie(name, data)
+
+
 
 @app.route('/Result', methods =['POST'])
 def picture():
@@ -43,16 +47,25 @@ def picture():
 def uploadFile():
     if request.method == 'POST':
         videoFile = request.files['video']
+        videoExt = videoFile.filename.rsplit('.', 1)[1]  # 获取文件后缀
         rDataFile = request.files['rData']
+        rDataExt = rDataFile.filename.rsplit('.', 1)[1]
         lDataFile = request.files['lData']
+        lDataExt = lDataFile.filename.rsplit('.', 1)[1]
+
         file_dir = os.path.join(basedir, app.config['UPLOAD_FOLDER'])
-        videoFile.save(os.path.join(file_dir, 'videoFile'))
-        rDataFile.save(os.path.join(file_dir, 'rDataFile'))
-        lDataFile.save(os.path.join(file_dir, 'lDataFile'))
+        videoPath = os.path.join(file_dir, 'videoFile' + '.' + videoExt)
+        videoFile.save(videoPath)
+        rDataFile.save(os.path.join(file_dir, 'rDataFile' + '.' + rDataExt))
+        lDataFile.save(os.path.join(file_dir, 'lDataFile' + '.' + lDataExt))
         name = []
         data = []
 
+
 #请修改这里
+        print(videoPath)
+        analysis_for_video(videoPath)
+
         resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
                      'person;individual;someone;somebody;mortal;soul': 6,
                      'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
@@ -62,6 +75,7 @@ def uploadFile():
             data.append(resultSum[i])
         uibar(name, data)
         uipie(name, data)
+
         return render_template('Result.html')
 
     return render_template('MainScreen.html')
