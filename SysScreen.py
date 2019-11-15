@@ -52,12 +52,16 @@ def upload_file():
     result_sum = []
     if request.method == 'POST':
         video_file = request.files['video']
+        video_ext = video_file.filename.rsplit('.', 1)[1]  # 获取文件后缀
         r_data_file = request.files['rData']
+        r_data_ext = r_data_file.filename.rsplit('.', 1)[1]  # 获取文件后缀
         l_data_file = request.files['lData']
+        l_data_ext = l_data_file.filename.rsplit('.', 1)[1]  # 获取文件后缀
         file_dir = os.path.join(basedir, app.config['UPLOAD_FOLDER'])
-        video_file.save(os.path.join(file_dir, 'videoFile'))
-        r_data_file.save(os.path.join(file_dir, 'rDataFile'))
-        l_data_file.save(os.path.join(file_dir, 'lDataFile'))
+        video_path = os.path.join(file_dir, 'videoFile' + '.' + video_ext)
+        video_file.save(video_path)
+        r_data_file.save(os.path.join(file_dir, 'rDataFile') + '.' + r_data_ext)
+        l_data_file.save(os.path.join(file_dir, 'lDataFile') + '.' + l_data_ext)
         name = []
         data = []
         confirm = request.get_json()
