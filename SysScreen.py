@@ -1,9 +1,12 @@
+import os
 from flask import Flask
 from flask import render_template
 from flask import request
 from templates.UiBar import UiBar
 from templates.UiPie import UiPie
-import os
+from eyeDataHandler.dataHandler import handle_result_img
+import extract.extract as e
+
 
 app = Flask(__name__)
 
@@ -13,58 +16,80 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 app.config['SECRET_KEY'] = 'secret string'
 
-@app.route('/', methods =['GET', 'POST'])
-def sysScreen():
+
+@app.route('/', methods=['GET', 'POST'])
+def sys_screen():
     return render_template('MainScreen.html')
 
-def uibar(name, data):
 
-    picture = UiBar()
-    picture.bar(name, data)
+def ui_bar(name, data):
 
-def uipie(name, data):
+    _picture = UiBar()
+    _picture.bar(name, data)
 
-    picture = UiPie()
-    picture.pie(name, data)
 
-@app.route('/Result', methods =['POST'])
+def ui_pie(name, data):
+
+    _picture = UiPie()
+    _picture.pie(name, data)
+
+
+@app.route('/Result', methods=['POST'])
 def picture():
 
-    id = request.form.get('formid')
+    _id = request.form.get('formid')
 
     if request.method == 'POST':
-        if id == 'bar':
+        if _id == 'bar':
             return render_template('bar.html')
 
-        if id == 'pie':
+        if _id == 'pie':
             return render_template('pie.html')
 
-@app.route('/uploadFile', methods =['POST'])
-def uploadFile():
+
+@app.route('/uploadFile', methods=['POST'])
+def upload_file():
+    result_sum = []
     if request.method == 'POST':
-        videoFile = request.files['video']
-        rDataFile = request.files['rData']
-        lDataFile = request.files['lData']
+        video_file = request.files['video']
+        r_data_file = request.files['rData']
+        l_data_file = request.files['lData']
         file_dir = os.path.join(basedir, app.config['UPLOAD_FOLDER'])
-        videoFile.save(os.path.join(file_dir, 'videoFile'))
-        rDataFile.save(os.path.join(file_dir, 'rDataFile'))
-        lDataFile.save(os.path.join(file_dir, 'lDataFile'))
+        video_file.save(os.path.join(file_dir, 'videoFile'))
+        r_data_file.save(os.path.join(file_dir, 'rDataFile'))
+        l_data_file.save(os.path.join(file_dir, 'lDataFile'))
         name = []
         data = []
-
-#请修改这里
-        resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
-                     'person;individual;someone;somebody;mortal;soul': 6,
-                     'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
-    #返回一个字典resultSum，当中注视点种类为键，注视点数量为值
-        for i in resultSum:
+        confirm = request.get_json()
+        result_path = os.path.join(os.path.dirname(video_file), "images")
+        # if confirm ==:
+        #     time_list = e.ExtractPictures.video_frames(
+        #         path_in=video_file,
+        #         path_out=result_path,
+        #         only_output_video_info=True,
+        #         extract_time_points=None,
+        #         initial_extract_time=0,
+        #         end_extract_time=None,
+        #         extract_time_interval=-1,
+        #         output_prefix='extract',
+        #         jpg_quality=100,
+        #     )
+        #     result_sum = handle_result_img(time_list)
+        # resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
+        #              'person;individual;someone;somebody;mortal;soul': 6,
+        #              'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
+        for i in result_sum:
             name.append(i)
-            data.append(resultSum[i])
-        uibar(name, data)
-        uipie(name, data)
+            data.append(result_sum[i])
+        ui_bar(name, data)
+        ui_pie(name, data)
         return render_template('Result.html')
 
     return render_template('MainScreen.html')
 
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
 
 
