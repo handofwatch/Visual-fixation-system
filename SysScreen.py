@@ -62,19 +62,19 @@ def upload_file():
         data = []
         confirm = request.get_json()
         result_path = os.path.join(os.path.dirname(video_file), "images")
-        # if confirm ==:
-        #     time_list = e.ExtractPictures.video_frames(
-        #         path_in=video_file,
-        #         path_out=result_path,
-        #         only_output_video_info=True,
-        #         extract_time_points=None,
-        #         initial_extract_time=0,
-        #         end_extract_time=None,
-        #         extract_time_interval=-1,
-        #         output_prefix='extract',
-        #         jpg_quality=100,
-        #     )
-        #     result_sum = handle_result_img(time_list)
+        if confirm == '':
+            time_list = e.ExtractPictures.video_frames(
+                path_in=video_file,
+                path_out=result_path,
+                only_output_video_info=True,
+                extract_time_points=None,
+                initial_extract_time=0,
+                end_extract_time=None,
+                extract_time_interval=-1,
+                output_prefix='extract',
+                jpg_quality=100,
+            )
+            result_sum = handle_result_img(time_list, l_data_file, r_data_file)
         # resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
         #              'person;individual;someone;somebody;mortal;soul': 6,
         #              'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}

@@ -2,15 +2,18 @@ import os
 import cv2
 from eyeDataHandler import getEyeData as g
 
+
+# 当前模块的路径
+base_dir = os.path.dirname(os.path.abspath(__file__))
 # 截取的图片时间序列（从前面传进来）
 img_time_list = [1.0, 7.7, 13.4]
 # 生成语义分割好的图片的文件夹位置
-result_pic_path = "../output/images"
+result_pic_path = os.path.normpath(os.path.join(base_dir, "../output/images"))
 # 左右眼数据位置
-left_eye_data_path = "../eyeData/left.txt"
-right_eye_data_path = "../eyeData/right.txt"
+# left_eye_data_path = os.path.normpath(os.path.join(base_dir, "../eyeData/left.txt"))
+# right_eye_data_path = os.path.normpath(os.path.join(base_dir, "../eyeData/right.txt"))
 # 标签txt文件位置
-tag_path = "../tagData/tag.txt"
+tag_path = os.path.normpath(os.path.join(base_dir, "../tagData/tag.txt"))
 # 允许的注视点一个时间间隔内的像素差，用于去除误差点
 allow_delta = 20
 
@@ -25,7 +28,7 @@ def read_result_imgs(result_path):
 
 
 # 核心函数，输入时间序列，输出注释点的详细信息序列和注视点统计字典
-def handle_result_img(img_time_list):
+def handle_result_img(img_time_list, left_eye_data_path, right_eye_data_path):
     point_time_list, points = g.align_two_eyes(left_eye_data_path, right_eye_data_path)
     points = g.wash_data(points, allow_delta)
     img_list = read_result_imgs(result_pic_path)
