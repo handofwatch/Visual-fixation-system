@@ -21,17 +21,22 @@ allow_delta = 20
 # 提取分割后的图片
 def read_result_imgs(result_path):
     img_list = []
+    result_img_list = []
     for filename in os.listdir(result_path):
-        img = cv2.imread(result_path + "/" + filename)
-        img_list.append(img)
-    return img_list
+        if str(filename)[-2] == 'n':
+            img = cv2.imread(result_path + "/" + filename)
+            result_img_list.append(img)
+        if str(filename)[-2] == 'p':
+            img = cv2.imread(result_path + "/" + filename)
+            img_list.append(img)
+    return img_list, result_img_list
 
 
 # 核心函数，输入时间序列，输出注释点的详细信息序列和注视点统计字典
 def handle_result_img(img_time_list, left_eye_data_path, right_eye_data_path):
     point_time_list, points = g.align_two_eyes(left_eye_data_path, right_eye_data_path)
     points = g.wash_data(points, allow_delta)
-    img_list = read_result_imgs(result_pic_path)
+    img_list, result_img_list = read_result_imgs(result_pic_path)
     print(img_list)
     tag_dict = get_color_dict(tag_path)
     points_detail = []
@@ -42,11 +47,13 @@ def handle_result_img(img_time_list, left_eye_data_path, right_eye_data_path):
         while points[point_id] == [-1, -1]:
             point_id += 1
         point = points[point_id]
-        height = img_list[i].shape[0]
-        width = img_list[i].shape[1]
-        #img_list[i] = paint_point(img_list[i], [point[0] + img_list[i].shape[1]/2, point[1]], 30, (255, 255, 255), 0.9)
-        color = img_list[i][int(point[1]*height/288)][int(point[0]*width/768 + width/2)]
+        height = result_img_list[i].shape[0]
+        width = result_img_list[i].shape[1]
+        result_img_list[i] = paint_point(result_img_list[i], [point[0], point[1]], 30, (0, 0, 255), 0.9)
+        color = result_img_list[i][int(point[1]*height/288)][int(point[0]*width/768 + width/2)]
         hex_color = rgb2hex([color[2], color[1], color[0]])
+        # 裁剪结果图片，取左半边
+        result_img_list[i] = result_img_list[i][:, 0:int(width/2)]
         print(hex_color)
         if hex_color in tag_dict:
             tag = tag_dict[hex_color]
@@ -57,9 +64,9 @@ def handle_result_img(img_time_list, left_eye_data_path, right_eye_data_path):
         else:
             result_dict[tag] = 1
         # 每个注视点的详细信息，分别是重新排的序号、所处视频的时间、所处图片中的位置、颜色、标签名称
-        point_detail = [i, img_time_list[i], int(point[0]*width/768 + width/2), int(point[1]*height/288), hex_color, tag]
+        point_detail = [i, img_time_list[i], int(point[0]*width/768), int(point[1]*height/288), hex_color, tag]
         points_detail.append(point_detail)
-    return points_detail, result_dict
+    return points_detail, result_dict, img_list, result_img_list
 
 
 # 传入特定时间t和眼动数据时间轴序列，返回t对应的眼动数据位置（int）
@@ -72,10 +79,10 @@ def find_nearest_time(t, array):
     return i
 
 
-# 在图片上画点（暂时没用）
+# 在图片上画点
 def paint_point(img, position, radius, color, alpha):
-    img_copy = img.copy()
-    cv2.circle(img, (int(position[0]), int(position[1])), radius, color, -1)
+    img_copy = img[:]
+    cv2.circle(img_copy, (int(position[0]), int(position[1])), radius, color, -1)
     img_new = cv2.addWeighted(img, alpha, img_copy, 1-alpha, 0)
     return img_new
 
@@ -130,6 +137,5 @@ def get_color_dict(tag_path):
     return tag_dict
 
 
-points_detail, result_dict = handle_result_img(img_time_list)
-print(points_detail)
-print(result_dict)
+# 注视点点的详细信息，结果字典，原图片集，加了注视点的图片集
+# points_detail, result_dict, img_list, result_img_list = handle_result_img(img_time_list, '/Users/engine/Desktop/Visual-fixation-system/eyeData/left.txt', '/Users/engine/Desktop/Visual-fixation-system/eyeData/right.txt')
