@@ -8,7 +8,7 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 # 截取的图片时间序列（从前面传进来）
 img_time_list = [1.0, 7.7, 13.4]
 # 生成语义分割好的图片的文件夹位置
-result_pic_path = os.path.normpath(os.path.join(base_dir, "../output/images"))
+result_pic_path = os.path.normpath(os.path.join(base_dir, "../upload/images"))
 # 左右眼数据位置
 # left_eye_data_path = os.path.normpath(os.path.join(base_dir, "../eyeData/left.txt"))
 # right_eye_data_path = os.path.normpath(os.path.join(base_dir, "../eyeData/right.txt"))

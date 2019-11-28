@@ -3,7 +3,10 @@ import extract as e
 
 
 def analysis(path):
-    os.system("python -u ../test.py \
+    file_path = os.path.abspath(__file__)
+    file_dir = os.path.dirname(file_path)
+    test_path = os.path.join(file_dir, "../test.py")
+    os.system("python -u " + test_path +"\
         --imgs %s  \
         --cfg ../config/ade20k-resnet101-upernet.yaml \
         TEST.result ./ \
@@ -12,15 +15,15 @@ def analysis(path):
 
 def analysis_for_video(path):
     result_path = os.path.join(os.path.dirname(path), "images")
-    print("result_path=" + result_path)
-    print("==============================================================")
-    print("**         choose the way you want to analyse video         **")
-    print("**              1-  the information of the video            **")
-    print("**       2-  input the pointer of the video yourself        **")
-    print("**        3-  extract images with continuous manner         **")
-    print("**          4-  extract images at custom intervals          **")
-    print("==============================================================")
-    print("please choose: ")
+    # print("result_path=" + result_path)
+    # print("==============================================================")
+    # print("**         choose the way you want to analyse video         **")
+    # print("**              1-  the information of the video            **")
+    # print("**       2-  input the pointer of the video yourself        **")
+    # print("**        3-  extract images with continuous manner         **")
+    # print("**          4-  extract images at custom intervals          **")
+    # print("==============================================================")
+    # print("please choose: ")
     _str = input()
     switch_case(_str, path, result_path)
     analysis(result_path)

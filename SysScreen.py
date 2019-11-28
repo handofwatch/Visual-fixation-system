@@ -67,6 +67,11 @@ def upload_file():
         l_data_path = os.path.join(file_dir, 'lDataFile') + '.' + l_data_ext
         l_data_file.save(l_data_path)
 
+        #test
+        print(video_path)
+        print(r_data_path)
+        print(l_data_path)
+
         start_time = request.form.get("startTime")
         print(start_time)
         start_time = float(start_time)
@@ -89,6 +94,8 @@ def upload_file():
         #得出time_list
         time_list = extract.interface.pass_input(start_time, end_time, interval, video_path, result_path)
 
+        #分析图片
+        extract.interface.analysis(result_path)
         #调用第二组函数处理图片
         result = handle_result_img(time_list, l_data_path, r_data_path)
         result_sum = result[1]

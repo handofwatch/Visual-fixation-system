@@ -19,9 +19,16 @@ import cv2
 from tqdm import tqdm
 from config import cfg
 
-colors = loadmat('../data/color150.mat')['colors']
+file_path = os.path.abspath(__file__)
+file_dir = os.path.dirname(file_path)
+print(file_dir)
+colors_path = os.path.join(file_dir, "data/color150.mat")
+print('1')
+colors = loadmat(colors_path)['colors']
 names = {}
-with open('../data/object150_info.csv') as f:
+
+open_path = os.path.join(file_dir, "data/object150_info.csv")
+with open(open_path) as f:
     reader = csv.reader(f)
     next(reader)
     for row in reader:
@@ -30,7 +37,8 @@ with open('../data/object150_info.csv') as f:
 
 def visualize_result(data, pred, cfg):
     (img, info) = data
-    csv_file = open("../output/rate.csv", 'w')
+    csv_path = os.path.join(file_dir, "output/rate.csv")
+    csv_file = open(csv_path, 'w')
     writer = csv.writer(csv_file)
     writer.writerow(["name", "ratio"])
     # print predictions in descending order
@@ -176,7 +184,8 @@ if __name__ == '__main__':
 
     # print(args.opts)
     # print("before merge: " + cfg.DIR)
-    cfg.merge_from_file(args.cfg)
+    cfg_path = os.path.join(file_dir, "data", args.cfg)
+    cfg.merge_from_file(cfg_path)
     cfg.merge_from_list(args.opts)
     # cfg.freeze()
 
@@ -189,10 +198,11 @@ if __name__ == '__main__':
 
     # absolute paths of model weights
     # print("before assign weights " + cfg.DIR)
-    cfg.MODEL.weights_encoder = os.path.join(
-        '../' + cfg.DIR, 'encoder' + cfg.TEST.suffix)
-    cfg.MODEL.weights_decoder = os.path.join(
-       '../' + cfg.DIR, 'decoder' + cfg.TEST.suffix)
+
+    cfg.MODEL.weights_encoder = os.path.join(file_dir, cfg.DIR, 'encoder' + cfg.TEST.suffix)
+
+    cfg.MODEL.weights_decoder = os.path.join(file_dir, cfg.DIR, 'decoder' + cfg.TEST.suffix)
+
 
     assert os.path.exists(cfg.MODEL.weights_encoder) and \
         os.path.exists(cfg.MODEL.weights_decoder), "checkpoint does not exits!"
