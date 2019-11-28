@@ -25,11 +25,11 @@ def analysis_for_video(path):
     switch_case(_str, path, result_path)
     analysis(result_path)
 
-
+#该函数拆分为了两个，原函数用来得出视频信息，拆出来的函数用来调用第二组工作
 def switch_case(choose, path, result_path):
     time_list = []
     if choose == "1":
-        time_list = e.ExtractPictures.video_frames(
+        video_infor = e.ExtractPictures.video_frames(
             path_in=path,
             path_out=result_path,
             only_output_video_info=True,
@@ -40,6 +40,8 @@ def switch_case(choose, path, result_path):
             output_prefix='extract',
             jpg_quality=100,
         )
+        return video_infor
+
     if choose == "2":
         print("please input the pointers you like: ")
         list_ = list(map(float, input().strip().split()))
@@ -86,17 +88,47 @@ def switch_case(choose, path, result_path):
                 output_prefix='extract',
                 jpg_quality=100,
             )
-    if choose == "4":
-        print("do you want to output the start time and the finish time you like?(yes or no)")
-        str_ = input()
-        if str_ == "yes":
-            print("start_time (s): ")
-            start_time = float(input())
-            print("end_time (s): ")
-            end_time = float(input())
-            print("Please input the interval you like, (s): ")
-            interval = float(input())
-            time_list = e.ExtractPictures.video_frames(
+    # if choose == "4":
+    #     print("do you want to output the start time and the finish time you like?(yes or no)")
+    #     str_ = input()
+    #     if str_ == "yes":
+    #         print("start_time (s): ")
+    #         start_time = float(input())
+    #         print("end_time (s): ")
+    #         end_time = float(input())
+    #         print("Please input the interval you like, (s): ")
+    #         interval = float(input())
+    #         time_list = e.ExtractPictures.video_frames(
+    #             path_in=path,
+    #             path_out=result_path,
+    #             only_output_video_info=False,
+    #             extract_time_points=None,
+    #             initial_extract_time=start_time,
+    #             end_extract_time=end_time,
+    #             extract_time_interval=interval,
+    #             output_prefix='extract',
+    #             jpg_quality=100,
+    #         )
+    #     else:
+    #         print("Please input the interval you like, (s): ")
+    #         interval = float(input())
+    #         time_list = e.ExtractPictures.video_frames(
+    #             path_in=path,
+    #             path_out=result_path,
+    #             only_output_video_info=False,
+    #             extract_time_points=None,
+    #             initial_extract_time=0,
+    #             end_extract_time=None,
+    #             extract_time_interval=interval,
+    #             output_prefix='extract',
+    #             jpg_quality=100,
+    #         )
+    # print("This is time_list:")
+    # print(time_list)
+
+#用来向后端传递用户输入
+def pass_input(start_time, end_time, interval, path, result_path):
+    time_list = e.ExtractPictures.video_frames(
                 path_in=path,
                 path_out=result_path,
                 only_output_video_info=False,
@@ -107,22 +139,8 @@ def switch_case(choose, path, result_path):
                 output_prefix='extract',
                 jpg_quality=100,
             )
-        else:
-            print("Please input the interval you like, (s): ")
-            interval = float(input())
-            time_list = e.ExtractPictures.video_frames(
-                path_in=path,
-                path_out=result_path,
-                only_output_video_info=False,
-                extract_time_points=None,
-                initial_extract_time=0,
-                end_extract_time=None,
-                extract_time_interval=interval,
-                output_prefix='extract',
-                jpg_quality=100,
-            )
-    print("This is time_list:")
-    print(time_list)
+
+    return time_list
 
 
 if __name__ == '__main__':

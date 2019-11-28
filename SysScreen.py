@@ -6,7 +6,7 @@ from templates.UiBar import UiBar
 from templates.UiPie import UiPie
 from eyeDataHandler.dataHandler import handle_result_img
 import extract.extract as e
-
+import extract.interface
 
 app = Flask(__name__)
 
@@ -47,10 +47,12 @@ def picture():
             return render_template('pie.html')
 
 
+#前端传入数据表单交由后端处理
 @app.route('/uploadFile', methods=['POST'])
 def upload_file():
     result_sum = []
     if request.method == 'POST':
+        #获得用户上传文件，并把他们放进服务器特定位置，并改为特定名字
         video_file = request.files['video']
         video_ext = video_file.filename.rsplit('.', 1)[1]  # 获取文件后缀
         r_data_file = request.files['rData']
@@ -59,26 +61,37 @@ def upload_file():
         l_data_ext = l_data_file.filename.rsplit('.', 1)[1]  # 获取文件后缀
         file_dir = os.path.join(basedir, app.config['UPLOAD_FOLDER'])
         video_path = os.path.join(file_dir, 'videoFile' + '.' + video_ext)
-        video_file.save(video_path)
-        r_data_file.save(os.path.join(file_dir, 'rDataFile') + '.' + r_data_ext)
-        l_data_file.save(os.path.join(file_dir, 'lDataFile') + '.' + l_data_ext)
+        video_file.save(video_path)#文件路径
+        r_data_path = os.path.join(file_dir, 'rDataFile') + '.' + r_data_ext
+        r_data_file.save(r_data_path)
+        l_data_path = os.path.join(file_dir, 'lDataFile') + '.' + l_data_ext
+        l_data_file.save(l_data_path)
+
+        start_time = request.form.get("startTime")
+        print(start_time)
+        start_time = float(start_time)
+        end_time = request.form.get("finishTime")
+        print(end_time)
+        end_time = float(end_time)
+        interval = request.form.get("interval")
+        interval = int(interval)
+
         name = []
         data = []
-        confirm = request.get_json()
-        result_path = os.path.join(os.path.dirname(video_file), "images")
-        if confirm == '':
-            time_list = e.ExtractPictures.video_frames(
-                path_in=video_file,
-                path_out=result_path,
-                only_output_video_info=True,
-                extract_time_points=None,
-                initial_extract_time=0,
-                end_extract_time=None,
-                extract_time_interval=-1,
-                output_prefix='extract',
-                jpg_quality=100,
-            )
-            result_sum = handle_result_img(time_list, l_data_file, r_data_file)
+        result_path = os.path.join(file_dir, "images")
+
+        #将用户输入数字作为参数调用interface函数接口,得出time_list值，然后带入dataHandler中
+
+        #拿到视频信息，一会儿后放在Result页面
+        #video_infor = extract.interface.switch_case(1, file_dir, result_path)
+        #print(video_infor)
+
+        #得出time_list
+        time_list = extract.interface.pass_input(start_time, end_time, interval, video_path, result_path)
+
+        #调用第二组函数处理图片
+        result = handle_result_img(time_list, l_data_path, r_data_path)
+        result_sum = result[1]
         # resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
         #              'person;individual;someone;somebody;mortal;soul': 6,
         #              'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
@@ -93,7 +106,6 @@ def upload_file():
 
 
 if __name__ == '__main__':
-    app.debug = True
     app.run()
 
 

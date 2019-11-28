@@ -27,8 +27,7 @@ class ExtractPictures:
         # 仅仅输出视频信息
         if only_output_video_info:
             _duration = str(duration)
-            print("output the video information:")
-            print("Duration of the video:" + _duration + "ns")
+            return _duration
 
         # 依据自定义时间点提取图片
         elif extract_time_points is not None:
