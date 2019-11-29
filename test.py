@@ -21,9 +21,7 @@ from config import cfg
 
 file_path = os.path.abspath(__file__)
 file_dir = os.path.dirname(file_path)
-print(file_dir)
 colors_path = os.path.join(file_dir, "data/color150.mat")
-print('1')
 colors = loadmat(colors_path)['colors']
 names = {}
 

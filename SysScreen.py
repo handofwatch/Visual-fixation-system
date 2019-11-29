@@ -5,7 +5,6 @@ from flask import request
 from templates.UiBar import UiBar
 from templates.UiPie import UiPie
 from eyeDataHandler.dataHandler import handle_result_img
-import extract.extract as e
 import extract.interface
 
 app = Flask(__name__)
@@ -67,16 +66,9 @@ def upload_file():
         l_data_path = os.path.join(file_dir, 'lDataFile') + '.' + l_data_ext
         l_data_file.save(l_data_path)
 
-        #test
-        print(video_path)
-        print(r_data_path)
-        print(l_data_path)
-
         start_time = request.form.get("startTime")
-        print(start_time)
         start_time = float(start_time)
         end_time = request.form.get("finishTime")
-        print(end_time)
         end_time = float(end_time)
         interval = request.form.get("interval")
         interval = int(interval)
@@ -95,9 +87,11 @@ def upload_file():
         time_list = extract.interface.pass_input(start_time, end_time, interval, video_path, result_path)
 
         #分析图片
-        extract.interface.analysis(result_path)
+        #extract.interface.analysis(result_path)
+
         #调用第二组函数处理图片
         result = handle_result_img(time_list, l_data_path, r_data_path)
+
         result_sum = result[1]
         # resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
         #              'person;individual;someone;somebody;mortal;soul': 6,
@@ -107,7 +101,7 @@ def upload_file():
             data.append(result_sum[i])
         ui_bar(name, data)
         ui_pie(name, data)
-        return render_template('Result.html')
+        return render_template('Result.html', point_infor=result[0])
 
     return render_template('MainScreen.html')
 
