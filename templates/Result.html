@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" id="result">
+
+视频长度(单位：秒)：{{video_infor}}
+
 <div id="div">
     <meta charset="UTF-8">
     <form action = "/Result" method="post" id="bar">
         <input type="hidden"  name="formid" value="bar" >
         <input type="button"  value="注视点数量柱状图" onclick="this.form.submit()">
     </form>
-
     <form action = "/Result" method="post" id="pie">
         <input type="hidden"  name="formid" value="pie" >
         <input type="button"  name="注视点数量扇形图" value="注视点数量扇形图" onclick="this.form.submit()">
@@ -22,22 +24,34 @@
         <td>注视点种类</td>
     </tr>
 </table>
+<div id="picture"><img style="height: 100px; width: 200px" src="../upload/images/extract_000001.png"  alt="注视点语义分割图"></div>
+
 </html>
 
 <script type="text/javascript">
-        console.log(1);
+    onload = function f() {
         var point_infor = '{{point_infor|tojson}}';
-        console.log(point_infor);
-        point_infor = point_infor.substring(1,point_infor.length-1);
+        point_infor = point_infor.substring(1, point_infor.length - 1);
         var point_data = JSON.parse(point_infor);
         var tb = document.getElementById("tb");
-        for (var i = 0; i< point_data.length; i++){
+        for (var i = 0; i < point_data.length; i++) {
             var row = tb.insertRow(i + 1);
             var point_single = point_data[i];
-            for (var j =0; j < 6; j++){
+            for (var j = 0; j < 6; j++) {
                 var c1 = row.insertCell(j);
                 c1.innerHTML = point_single[j];
             }
         }
+        console.log("img");
+        var pict_num = '{{pict_num}}';
+        console.log(pict_num);
+        for(var k = 0; k < pict_num; k++){
+            var num = k + 1;
+            var img = '<img style="height: 100px; width: 200px" src="../upload/images/extract_00000'+ num +'.png"  alt="注视点语义分割图">';
+            console.log(img);
+            var pict = document.getElementById("picture");
+            pict.innerHTML = img;
+        }
 
+    }
 </script>

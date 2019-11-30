@@ -2,11 +2,11 @@ import os
 from flask import Flask
 from flask import render_template
 from flask import request
-from flask import jsonify
 import json
 from templates.UiBar import UiBar
 from templates.UiPie import UiPie
 from eyeDataHandler.dataHandler import handle_result_img
+import extract.extract as e
 import extract.interface
 
 app = Flask(__name__)
@@ -77,17 +77,28 @@ def upload_file():
 
         name = []
         data = []
-        point_dict = {}
         result_path = os.path.join(file_dir, "images")
 
         #将用户输入数字作为参数调用interface函数接口,得出time_list值，然后带入dataHandler中
 
         #拿到视频信息，一会儿后放在Result页面
-        #video_infor = extract.interface.switch_case(1, file_dir, result_path)
+        video_infor = e.ExtractPictures.video_frames(
+            path_in=video_path,
+            path_out=result_path,
+            only_output_video_info=True,
+            extract_time_points=None,
+            initial_extract_time=0,
+            end_extract_time=None,
+            extract_time_interval=-1,
+            output_prefix='extract',
+            jpg_quality=100,
+        )
         #print(video_infor)
 
         #得出time_list
         time_list = extract.interface.pass_input(start_time, end_time, interval, video_path, result_path)
+        print("========")
+        print(time_list)
 
         #分析图片
         #extract.interface.analysis(result_path)
@@ -108,7 +119,10 @@ def upload_file():
         ui_bar(name, data)
         ui_pie(name, data)
 
-        return render_template('Result.html', point_infor=json.dumps(point_list))
+        pict_num = len(time_list)
+        print(pict_num)
+        return render_template('Result.html', point_infor=json.dumps(point_list), video_infor=json.dumps(video_infor),
+                               pict_num=pict_num)
 
     return render_template('MainScreen.html')
 
