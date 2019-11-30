@@ -2,6 +2,8 @@ import os
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import jsonify
+import json
 from templates.UiBar import UiBar
 from templates.UiPie import UiPie
 from eyeDataHandler.dataHandler import handle_result_img
@@ -75,6 +77,7 @@ def upload_file():
 
         name = []
         data = []
+        point_dict = {}
         result_path = os.path.join(file_dir, "images")
 
         #将用户输入数字作为参数调用interface函数接口,得出time_list值，然后带入dataHandler中
@@ -90,9 +93,12 @@ def upload_file():
         #extract.interface.analysis(result_path)
 
         #调用第二组函数处理图片
-        result = handle_result_img(time_list, l_data_path, r_data_path)
+        #result = handle_result_img(time_list, l_data_path, r_data_path)
 
-        result_sum = result[1]
+        #test
+        point_list = [[0, 0.0, 1219, 503, '#FF0652', 'table'], [1, 0.03, 1219, 503, '#FF0652', 'table']]
+
+        result_sum = {'table': 2} #result[1]
         # resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
         #              'person;individual;someone;somebody;mortal;soul': 6,
         #              'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
@@ -101,7 +107,8 @@ def upload_file():
             data.append(result_sum[i])
         ui_bar(name, data)
         ui_pie(name, data)
-        return render_template('Result.html', point_infor=result[0])
+
+        return render_template('Result.html', point_infor=json.dumps(point_list))
 
     return render_template('MainScreen.html')
 

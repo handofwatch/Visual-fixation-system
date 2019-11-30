@@ -12,7 +12,6 @@
         <input type="button"  name="注视点数量扇形图" value="注视点数量扇形图" onclick="this.form.submit()">
     </form>
     </div>
-
 <table id="tb">
     <tr>
         <td>注视点编号</td>
@@ -25,17 +24,20 @@
 </table>
 </html>
 
-<script>
-    $(document).ready(function (){
-        var point_infor = $('{{point_infor|safe}}');
+<script type="text/javascript">
+        console.log(1);
+        var point_infor = '{{point_infor|tojson}}';
+        console.log(point_infor);
+        point_infor = point_infor.substring(1,point_infor.length-1);
+        var point_data = JSON.parse(point_infor);
         var tb = document.getElementById("tb");
-        for (var i = 0; i< point_infor.length; i++){
+        for (var i = 0; i< point_data.length; i++){
             var row = tb.insertRow(i + 1);
-            var point_single = point_infor[i];
+            var point_single = point_data[i];
             for (var j =0; j < 6; j++){
                 var c1 = row.insertCell(j);
                 c1.innerHTML = point_single[j];
             }
         }
-    })
+
 </script>
