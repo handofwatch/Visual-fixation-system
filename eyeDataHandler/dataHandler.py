@@ -20,24 +20,19 @@ allow_delta = 20
 
 # 提取分割后的图片
 def read_result_imgs(result_path):
-    img_list = []
     result_img_list = []
     for filename in os.listdir(result_path):
         if str(filename)[-2] == 'n':
             img = cv2.imread(result_path + "/" + filename)
             result_img_list.append(img)
-        if str(filename)[-2] == 'p':
-            img = cv2.imread(result_path + "/" + filename)
-            img_list.append(img)
-    return img_list, result_img_list
+    return result_img_list
 
 
 # 核心函数，输入时间序列，输出注释点的详细信息序列和注视点统计字典
 def handle_result_img(img_time_list, left_eye_data_path, right_eye_data_path):
     point_time_list, points = g.align_two_eyes(left_eye_data_path, right_eye_data_path)
     points = g.wash_data(points, allow_delta)
-    img_list, result_img_list = read_result_imgs(result_pic_path)
-    print(img_list)
+    result_img_list = read_result_imgs(result_pic_path)
     tag_dict = get_color_dict(tag_path)
     points_detail = []
     result_dict = {}
@@ -66,7 +61,8 @@ def handle_result_img(img_time_list, left_eye_data_path, right_eye_data_path):
         # 每个注视点的详细信息，分别是重新排的序号、所处视频的时间、所处图片中的位置、颜色、标签名称
         point_detail = [i, img_time_list[i], int(point[0]*width/768), int(point[1]*height/288), hex_color, tag]
         points_detail.append(point_detail)
-    return points_detail, result_dict, img_list, result_img_list
+        cv2.imwrite('../static/result_images/' + str(i) + '.png', result_img_list[i])
+    return points_detail, result_dict
 
 
 # 传入特定时间t和眼动数据时间轴序列，返回t对应的眼动数据位置（int）
@@ -81,8 +77,8 @@ def find_nearest_time(t, array):
 
 # 在图片上画点
 def paint_point(img, position, radius, color, alpha):
-    img_copy = img[:]
-    cv2.circle(img_copy, (int(position[0]), int(position[1])), radius, color, -1)
+    img_copy = img.copy()
+    cv2.circle(img, (int(position[0]), int(position[1])), radius, color, -1)
     img_new = cv2.addWeighted(img, alpha, img_copy, 1-alpha, 0)
     return img_new
 
@@ -138,4 +134,4 @@ def get_color_dict(tag_path):
 
 
 # 注视点点的详细信息，结果字典，原图片集，加了注视点的图片集
-# points_detail, result_dict, img_list, result_img_list = handle_result_img(img_time_list, '/Users/engine/Desktop/Visual-fixation-system/eyeData/left.txt', '/Users/engine/Desktop/Visual-fixation-system/eyeData/right.txt')
+# points_detail, result_dict = handle_result_img(img_time_list, '/Users/engine/Desktop/Visual-fixation-system/eyeData/left.txt', '/Users/engine/Desktop/Visual-fixation-system/eyeData/right.txt')
