@@ -1,13 +1,14 @@
 import os
 from flask import Flask
 from flask import render_template
-from flask import request
+from flask import request, url_for
 import json
 from templates.UiBar import UiBar
 from templates.UiPie import UiPie
 from eyeDataHandler.dataHandler import handle_result_img
 import extract.extract as e
 import extract.interface
+import shutil
 
 app = Flask(__name__)
 
@@ -53,6 +54,12 @@ def picture():
 def upload_file():
     result_sum = []
     if request.method == 'POST':
+        #清空原本文件夹
+        shutil.rmtree('upload')
+        os.mkdir('upload')
+        os.mkdir('upload/images')
+        shutil.rmtree('static/result_images')
+        os.mkdir('static/result_images')
         #获得用户上传文件，并把他们放进服务器特定位置，并改为特定名字
         video_file = request.files['video']
         video_ext = video_file.filename.rsplit('.', 1)[1]  # 获取文件后缀
@@ -73,7 +80,7 @@ def upload_file():
         end_time = request.form.get("finishTime")
         end_time = float(end_time)
         interval = request.form.get("interval")
-        interval = int(interval)
+        interval = float(interval)
 
         name = []
         data = []
@@ -101,18 +108,20 @@ def upload_file():
         print(time_list)
 
         #分析图片
-        #extract.interface.analysis(result_path)
+        extract.interface.analysis(result_path)
 
         #调用第二组函数处理图片
-        #result = handle_result_img(time_list, l_data_path, r_data_path)
+        result = handle_result_img(time_list, l_data_path, r_data_path)
 
         #test
-        point_list = [[0, 0.0, 1219, 503, '#FF0652', 'table'], [1, 0.03, 1219, 503, '#FF0652', 'table']]
+        point_list = result[0]
+        #point_list = [[0, 0.0, 1219, 503, '#FF0652', 'table'], [1, 0.03, 1219, 503, '#FF0652', 'table']]
 
-        result_sum = {'table': 2} #result[1]
-        # resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
-        #              'person;individual;someone;somebody;mortal;soul': 6,
-        #              'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
+        # result_sum = result[1]
+        #result_sum = {'table': 2}
+        resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
+                     'person;individual;someone;somebody;mortal;soul': 6,
+                     'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
         for i in result_sum:
             name.append(i)
             data.append(result_sum[i])
@@ -120,7 +129,7 @@ def upload_file():
         ui_pie(name, data)
 
         pict_num = len(time_list)
-        print(pict_num)
+        [url_for('static', filename=f"result_images/extract_00000{pic}.png") for pic in range(1, 4)]
         return render_template('Result.html', point_infor=json.dumps(point_list), video_infor=json.dumps(video_infor),
                                pict_num=pict_num)
 

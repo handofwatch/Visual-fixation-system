@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" id="result">
+<head>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+    <title>Result</title>
+</head>
+<body>
 视频长度(单位：秒)：{{video_infor}}
 
 <div id="div">
@@ -24,9 +32,28 @@
         <td>注视点种类</td>
     </tr>
 </table>
-<div id="picture"><img style="height: 100px; width: 200px" src="../upload/images/extract_000001.png"  alt="注视点语义分割图"></div>
+<div id="demo" class="carousel slide" data-ride="carousel">
 
-</html>
+  <!-- 指示符 -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+
+  <!-- 轮播图片 -->
+  <div class="carousel-inner" id = spin>
+  </div>
+
+  <!-- 左右切换按钮 -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
+</div>
 
 <script type="text/javascript">
     onload = function f() {
@@ -45,13 +72,31 @@
         console.log("img");
         var pict_num = '{{pict_num}}';
         console.log(pict_num);
+        var div_dict = {};
+        var img_dict = {};
         for(var k = 0; k < pict_num; k++){
             var num = k + 1;
-            var img = '<img style="height: 100px; width: 200px" src="../upload/images/extract_00000'+ num +'.png"  alt="注视点语义分割图">';
-            console.log(img);
-            var pict = document.getElementById("picture");
-            pict.innerHTML = img;
+
+            div_dict[num] = document.createElement("div");
+            if(num === 1){
+                div_dict[num].className = 'carousel-item active';
+            }
+            else{
+                div_dict[num].className = 'carousel-item';
+            }
+            div_dict[num].id = 'spanitem' + num;
+            var dom = document.getElementById("spin");
+            dom.appendChild(div_dict[num]);
+            img_dict[num] = document.createElement("img");
+            img_dict[num].src = "/upload/images/extract_00000" + num + ".png";
+            console.log(num);
+            img_dict[num].height = 300;
+            img_dict[num].width = 600;
+            div_dict[num].appendChild(img_dict[num]);
+            console.log(div_dict[num]);
         }
 
     }
 </script>
+</body>
+</html>

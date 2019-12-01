@@ -2,161 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f15406b-fb04-48c5-9a2a-0f181b63542d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/output/rate.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/task1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/task1.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUIClass.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GetData.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModifyData.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReturnData.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/SysScreen.py" beforeDir="false" afterPath="$PROJECT_DIR$/SysScreen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/defaults.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/defaults.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/175.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/images/175.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/images/175.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/images/25.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/images/25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/extract/interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/extract/interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input/test.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/output/test.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/nn/modules/batchnorm.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/nn/modules/batchnorm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/data/dataloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/data/dataloader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/data/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/data/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jquery-3.4.1.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/jquery-3.4.1.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teaser/ADE_val_00000278.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teaser/ADE_val_00001519.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckpt/ade20k-mobilenetv2dilated-c1_deepsup/result/ADE_val_00000001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/images/extract_000001.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/images/extract_000002.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/rate.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/rate.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/test.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/result_images/example.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/MainScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/MainScreen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Result.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Result.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/bar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/bar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pie.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pie.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/images/extract_000001 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/images/extract_000001.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/upload/images/extract_000001.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/images/extract_000001.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/images/extract_000002.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/images/extract_000002.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/images/extract_000003.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/images/extract_000003.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/images/extract_000004.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/upload/images/extract_000004.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/extract/interface.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
-              <folding>
-                <element signature="e#14#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/output/rate.csv">
-          <provider selected="true" editor-type-id="csv-text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-            </state>
-          </provider>
-          <provider editor-type-id="csv-table-editor">
-            <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-              <folding>
-                <element signature="e#14#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/MainScreen.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SysScreen.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="457">
-              <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/opt/anaconda3/envs/pytorch/lib/python3.7/site-packages/numpy/core/fromnumeric.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14460">
-              <caret line="978" column="4" selection-start-line="978" selection-start-column="4" selection-end-line="978" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/extract/extract.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2190">
-              <caret line="147" selection-start-line="147" selection-end-line="147" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -168,69 +43,23 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/extract/extract_picture.py" />
-        <option value="$PROJECT_DIR$/extract/extract_frame.py" />
-        <option value="$PROJECT_DIR$/GUIClass.py" />
-        <option value="$PROJECT_DIR$/output.py" />
-        <option value="$PROJECT_DIR$/extract/__init__.py" />
-        <option value="$PROJECT_DIR$/extract/extract.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/dataset.py" />
-        <option value="$PROJECT_DIR$/rename.py" />
-        <option value="$PROJECT_DIR$/extract/interface.py" />
-        <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/SysScreen.py" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="700" />
-    <option name="height" value="877" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Visual-fixation-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Visual-fixation-system" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Visual-fixation-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Visual-fixation-system" type="462c0819:PsiDirectoryNode" />
-              <item name="output" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Visual-fixation-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Visual-fixation-system" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
+  <component name="ProjectId" id="1UD2l6jGQ6MvbENzj5VqMOBMjHp" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/upload/images" />
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/extract" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -246,13 +75,13 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.SysScreen">
+    <configuration name="Result.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Visual-fixation-system/templates/Result.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="SysScreen" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="task1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -337,6 +166,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.SysScreen" />
+        <item itemvalue="JavaScript Debug.Result.html" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.interface" />
       </list>
@@ -360,296 +190,35 @@
       <workItem from="1573733879917" duration="2900000" />
       <workItem from="1573741306225" duration="43000" />
       <workItem from="1573741566239" duration="239000" />
+      <workItem from="1574876995565" duration="12101000" />
+      <workItem from="1574950545134" duration="6543000" />
+      <workItem from="1574961684698" duration="15236000" />
+      <workItem from="1575104455238" duration="532000" />
+      <workItem from="1575130886972" duration="6266000" />
+      <workItem from="1575179391515" duration="223000" />
+      <workItem from="1575179789006" duration="9117000" />
+      <workItem from="1575208510773" duration="2170000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34926000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="23" width="700" height="877" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2431611" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4988086" weight="0.32738853" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3299363" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5013158" side_tool="true" weight="0.3299363" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.4986842" visible="true" weight="0.3299363" />
-      <window_info anchor="bottom" id="Docker" order="11" />
-      <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="0" y="0" width="300" height="677" id="Documentation" order="3" side_tool="true" weight="0.5882883" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="SciView" order="5" />
-    </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31578946" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Docker" order="0" />
-      <window_info anchor="bottom" id="Database Changes" order="1" />
-      <window_info anchor="bottom" id="Message" order="2" />
-      <window_info anchor="bottom" id="Find" order="3" />
-      <window_info anchor="bottom" id="Run" order="4" sideWeight="0.4988086" visible="true" weight="0.32786885" />
-      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5013158" side_tool="true" visible="true" weight="0.3299363" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.4986842" visible="true" weight="0.3299363" />
-      <window_info anchor="right" x="0" y="0" width="300" height="677" id="Documentation" order="0" side_tool="true" weight="0.6030303" />
-      <window_info anchor="right" id="Database" order="1" />
-      <window_info anchor="right" id="SciView" order="2" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="3" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Visual_fixation_system$interface.coverage" NAME="interface Coverage Results" MODIFIED="1572141920269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/extract" />
-    <SUITE FILE_PATH="coverage/Visual_fixation_system$main.coverage" NAME="main Coverage Results" MODIFIED="1573720459264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/input/images/results/100.png" />
-    <entry file="file://$PROJECT_DIR$/demo_test.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GUIClass.py" />
-    <entry file="file://$PROJECT_DIR$/GetData.py" />
-    <entry file="file://$PROJECT_DIR$/eval_multipro.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/environment.yml" />
-    <entry file="file://$PROJECT_DIR$/ModifyData.py" />
-    <entry file="file://$PROJECT_DIR$/ReturnData.py" />
-    <entry file="file://$PROJECT_DIR$/output.py" />
-    <entry file="file://$PROJECT_DIR$/eval.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-326">
-          <caret line="31" column="42" lean-forward="true" selection-start-line="31" selection-start-column="42" selection-end-line="31" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ckpt/ade20k-resnet101-upernet/.gitattributes">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitattributes" />
-    <entry file="file://$PROJECT_DIR$/.vscode/launch.json" />
-    <entry file="file://$PROJECT_DIR$/dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/ade20k-mobilenetv2dilated-c1_deepsup.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-271" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/ade20k-resnet18dilated-ppm_deepsup.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-246" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/ade20k-resnet50dilated-ppm_deepsup.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-271" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/ade20k-resnet101-upernet.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/images/25.png" />
-    <entry file="file://$PROJECT_DIR$/data/175.png" />
-    <entry file="file://$PROJECT_DIR$/config/ade20k-resnet101dilated-ppm_deepsup.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-271" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/training.odgt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12270">
-          <caret line="818" column="167" selection-start-line="818" selection-start-column="167" selection-end-line="818" selection-end-column="167" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/README.md" />
-    <entry file="file://$PROJECT_DIR$/data/validation.odgt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2132" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/object150_info.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="-1684">
-          <caret line="13" column="67" selection-start-line="13" selection-start-column="67" selection-end-line="13" selection-end-column="67" />
-        </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/teaser/ADE_val_00000278.png" />
-    <entry file="file://$PROJECT_DIR$/tagData/tag.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bar.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/UiPie.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/UiBar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rename.py" />
-    <entry file="file://$PROJECT_DIR$/main.py" />
-    <entry file="file://$PROJECT_DIR$/output/images/extract_000001.png" />
-    <entry file="file://$PROJECT_DIR$/output/images/extract_000002.png" />
-    <entry file="file://$USER_HOME$/opt/anaconda3/envs/pytorch/lib/python3.7/argparse.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10844">
-          <caret line="1758" column="19" lean-forward="true" selection-start-line="1758" selection-start-column="19" selection-end-line="1758" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output/images/extract_000001.jpg" />
-    <entry file="file://$PROJECT_DIR$/output/images/extract_000002.jpg" />
-    <entry file="file://$PROJECT_DIR$/output/images/extract_000003.jpg" />
-    <entry file="file://$PROJECT_DIR$/output/images/extract_000003.png" />
-    <entry file="file://$PROJECT_DIR$/config/defaults.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output/rate.txt" />
-    <entry file="file://$PROJECT_DIR$/extract/interface.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
-          <folding>
-            <element signature="e#14#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output/rate.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#14#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/MainScreen.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/opt/anaconda3/envs/pytorch/lib/python3.7/site-packages/numpy/core/fromnumeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14460">
-          <caret line="978" column="4" selection-start-line="978" selection-start-column="4" selection-end-line="978" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extract/extract.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2190">
-          <caret line="147" selection-start-line="147" selection-end-line="147" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SysScreen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="35" column="23" lean-forward="true" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Visual_fixation_system$main.coverage" NAME="main Coverage Results" MODIFIED="1573720459264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Visual_fixation_system$interface.coverage" NAME="interface Coverage Results" MODIFIED="1572141920269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/extract" />
   </component>
 </project>
