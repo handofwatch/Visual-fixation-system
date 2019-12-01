@@ -25,20 +25,17 @@ def sys_screen():
 
 
 def ui_bar(name, data):
-
     _picture = UiBar()
     _picture.bar(name, data)
 
 
 def ui_pie(name, data):
-
     _picture = UiPie()
     _picture.pie(name, data)
 
 
 @app.route('/Result', methods=['POST'])
 def picture():
-
     _id = request.form.get('formid')
 
     if request.method == 'POST':
@@ -49,18 +46,15 @@ def picture():
             return render_template('pie.html')
 
 
-#前端传入数据表单交由后端处理
+# 前端传入数据表单交由后端处理
 @app.route('/uploadFile', methods=['POST'])
 def upload_file():
     result_sum = []
     if request.method == 'POST':
-        #清空原本文件夹
-        shutil.rmtree('upload')
-        os.mkdir('upload')
-        os.mkdir('upload/images')
-        shutil.rmtree('static/result_images')
-        os.mkdir('static/result_images')
-        #获得用户上传文件，并把他们放进服务器特定位置，并改为特定名字
+        # 清空原本文件夹
+        clean_file()
+
+        # 获得用户上传文件，并把他们放进服务器特定位置，并改为特定名字
         video_file = request.files['video']
         video_ext = video_file.filename.rsplit('.', 1)[1]  # 获取文件后缀
         r_data_file = request.files['rData']
@@ -69,7 +63,7 @@ def upload_file():
         l_data_ext = l_data_file.filename.rsplit('.', 1)[1]  # 获取文件后缀
         file_dir = os.path.join(basedir, app.config['UPLOAD_FOLDER'])
         video_path = os.path.join(file_dir, 'videoFile' + '.' + video_ext)
-        video_file.save(video_path)#文件路径
+        video_file.save(video_path)  # 文件路径
         r_data_path = os.path.join(file_dir, 'rDataFile') + '.' + r_data_ext
         r_data_file.save(r_data_path)
         l_data_path = os.path.join(file_dir, 'lDataFile') + '.' + l_data_ext
@@ -86,9 +80,9 @@ def upload_file():
         data = []
         result_path = os.path.join(file_dir, "images")
 
-        #将用户输入数字作为参数调用interface函数接口,得出time_list值，然后带入dataHandler中
+        # 将用户输入数字作为参数调用interface函数接口,得出time_list值，然后带入dataHandler中
 
-        #拿到视频信息，一会儿后放在Result页面
+        # 拿到视频信息，一会儿后放在Result页面
         video_infor = e.ExtractPictures.video_frames(
             path_in=video_path,
             path_out=result_path,
@@ -100,28 +94,28 @@ def upload_file():
             output_prefix='extract',
             jpg_quality=100,
         )
-        #print(video_infor)
+        # print(video_infor)
 
-        #得出time_list
+        # 得出time_list
         time_list = extract.interface.pass_input(start_time, end_time, interval, video_path, result_path)
         print("========")
         print(time_list)
 
-        #分析图片
+        # 分析图片
         extract.interface.analysis(result_path)
 
-        #调用第二组函数处理图片
+        # 调用第二组函数处理图片
         result = handle_result_img(time_list, l_data_path, r_data_path)
 
-        #test
+        # test
         point_list = result[0]
-        #point_list = [[0, 0.0, 1219, 503, '#FF0652', 'table'], [1, 0.03, 1219, 503, '#FF0652', 'table']]
+        # point_list = [[0, 0.0, 1219, 503, '#FF0652', 'table'], [1, 0.03, 1219, 503, '#FF0652', 'table']]
 
-        # result_sum = result[1]
-        #result_sum = {'table': 2}
-        resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
-                     'person;individual;someone;somebody;mortal;soul': 6,
-                     'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
+        result_sum = result[1]
+        # result_sum = {'table': 2}
+        # resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
+        #              'person;individual;someone;somebody;mortal;soul': 6,
+        #              'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
         for i in result_sum:
             name.append(i)
             data.append(result_sum[i])
@@ -129,14 +123,24 @@ def upload_file():
         ui_pie(name, data)
 
         pict_num = len(time_list)
-        [url_for('static', filename=f"result_images/extract_00000{pic}.png") for pic in range(1, 4)]
+        # 为图片分配url
+        for i in range(0, pict_num):
+            num = str(i)
+            url_for('static', filename=num + ".png")
+            print(url_for)
         return render_template('Result.html', point_infor=json.dumps(point_list), video_infor=json.dumps(video_infor),
                                pict_num=pict_num)
 
     return render_template('MainScreen.html')
 
 
+def clean_file():
+    shutil.rmtree('upload')
+    os.mkdir('upload')
+    os.mkdir('upload/images')
+    shutil.rmtree('static')
+    os.mkdir('static')
+
+
 if __name__ == '__main__':
     app.run()
-
-

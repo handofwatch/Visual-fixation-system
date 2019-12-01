@@ -61,7 +61,8 @@ def handle_result_img(img_time_list, left_eye_data_path, right_eye_data_path):
         # 每个注视点的详细信息，分别是重新排的序号、所处视频的时间、所处图片中的位置、颜色、标签名称
         point_detail = [i, img_time_list[i], int(point[0]*width/768), int(point[1]*height/288), hex_color, tag]
         points_detail.append(point_detail)
-        cv2.imwrite('../static/result_images/' + str(i) + '.png', result_img_list[i])
+        write_path = os.path.join(base_dir, '../static/result_images')
+        cv2.imwrite(write_path + str(i) + '.png', result_img_list[i])
     return points_detail, result_dict
 
 

@@ -57,6 +57,8 @@
 
 <script type="text/javascript">
     onload = function f() {
+
+        //实现注视点表格
         var point_infor = '{{point_infor|tojson}}';
         point_infor = point_infor.substring(1, point_infor.length - 1);
         var point_data = JSON.parse(point_infor);
@@ -74,26 +76,26 @@
         console.log(pict_num);
         var div_dict = {};
         var img_dict = {};
+        //为轮播动态生成图片
         for(var k = 0; k < pict_num; k++){
-            var num = k + 1;
 
-            div_dict[num] = document.createElement("div");
-            if(num === 1){
-                div_dict[num].className = 'carousel-item active';
+            div_dict[k] = document.createElement("div");
+            if(k === 0){
+                div_dict[k].className = 'carousel-item active';
             }
             else{
-                div_dict[num].className = 'carousel-item';
+                div_dict[k].className = 'carousel-item';
             }
-            div_dict[num].id = 'spanitem' + num;
+            div_dict[k].id = 'spanitem' + k;
             var dom = document.getElementById("spin");
-            dom.appendChild(div_dict[num]);
-            img_dict[num] = document.createElement("img");
-            img_dict[num].src = "/upload/images/extract_00000" + num + ".png";
-            console.log(num);
-            img_dict[num].height = 300;
-            img_dict[num].width = 600;
-            div_dict[num].appendChild(img_dict[num]);
-            console.log(div_dict[num]);
+            dom.appendChild(div_dict[k]);
+            img_dict[k] = document.createElement("img");
+            img_dict[k].src = "/static/result_images" + k + ".png";
+            console.log(k);
+            img_dict[k].height = 300;
+            img_dict[k].width = 900;
+            div_dict[k].appendChild(img_dict[k]);
+            console.log(div_dict[k]);
         }
 
     }
