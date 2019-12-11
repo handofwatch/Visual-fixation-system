@@ -2,57 +2,171 @@
 <html lang="en" id="result">
 <head>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <title>Result</title>
-</head>
-<body>
-视频长度(单位：秒)：{{video_infor}}
-
-<div id="div">
     <meta charset="UTF-8">
-    <form action = "/Result" method="post" id="bar">
-        <input type="hidden"  name="formid" value="bar" >
-        <input type="button"  value="注视点数量柱状图" onclick="this.form.submit()">
-    </form>
-    <form action = "/Result" method="post" id="pie">
-        <input type="hidden"  name="formid" value="pie" >
-        <input type="button"  name="注视点数量扇形图" value="注视点数量扇形图" onclick="this.form.submit()">
-    </form>
+    <title>Result</title>
+    <style type="text/css">
+        .container_head{
+            background: #f2f2f2;
+            margin-left: -15px;
+            height: 150px;
+            width: 1140px;
+            opacity: 0.8;
+            border-color: #127272;
+            box-shadow: inset 5px 5px 16px #346a72, inset -5px -5px 5px #486772;
+            font-family: 'STKaiti';
+        }
+        .head_h1{
+            margin: auto;
+            padding-top: 50px;
+            color: #127272;
+            width: 500px;
+            height: 60px;
+        }
+        .titles{
+            font-size: 25px;
+            color: #346a72;
+            font-family: 'STKaiti';
+        }
+        .hr_{
+            filter: alpha(opacity=100, finishOpacity=0, style=3);
+            width: 120%;
+            color: #987cb9;
+            size: 3px;
+        }
+        .a-btn{
+            background: #7aa961;
+            filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9db80', endColorstr='#96c56f',GradientType=0 );
+            width: 200px;
+            height:45px;
+            display:inline-block;
+            position:relative;
+            border:1px solid #7ed177;
+            float:left;
+            clear:both;
+            margin:10px 0;
+            overflow:hidden;
+        }
+        .a-btn:hover{
+            box-shadow:2px 3px 3px rgba(255,255,255,0.8) inset, 2px 3px 5px rgba(0,0,0,0.4);
+        }
+        .a-btn:active{
+            position:relative;
+            top:1px;
+            background: #7aa961;
+            box-shadow:2px 3px 3px rgba(0, 0, 0, 0.4) inset;
+            border-color: #c4f799;
+        }
+        .pic_{
+            margin: auto;
+            height: 150px;
+            width: 800px;
+
+        }
+
+    </style>
+</head>
+<body style="background: #ffffff">
+<div class="container">
+<div class="container_head">
+    <h1 class="head_h1">语义分割与注视点统计结果</h1>
+</div>
+</div>
+<br>
+<div class="container" style="background: #f2f2f2; opacity: 0.7;
+         height: 1500px; width: 1200px;
+         box-shadow: inset 5px 5px 16px #346a72, inset -5px -5px 5px #486772;">
+<div class="container">
+    <br>
+    <div class="row">
+        <h1 class="titles">视频基本信息：</h1>
+        <HR class="hr_">
     </div>
-<table id="tb">
-    <tr>
-        <td>注视点编号</td>
-        <td>注视点所处视频时间</td>
-        <td>注视点x轴坐标</td>
-        <td>注视点y轴坐标</td>
-        <td>注视点种类颜色编号</td>
-        <td>注视点种类</td>
-    </tr>
-</table>
-<div id="demo" class="carousel slide" data-ride="carousel">
+    <div class="row">
+        <div class="col-sm-3">
+            <span class="video_length">视频长度(单位：秒)：</span>
+        </div>
+        <div class="col-sm-3">
+            <span>{{video_infor}}</span>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="container">
+    <div id="div">
+        <div class="row">
+            <h1 class="titles">注视点统计结果数据可视化：</h1>
+            <HR class="hr_">
+        </div>
+        <div class="row">
+            <div class="col col-sm-6">
+                <form action = "/Result" method="post" id="bar">
+                    <input type="hidden"  name="formid" value="bar" >
+                    <input class="a-btn" type="button"  value="注视点数量柱状图" onclick="this.form.submit()">
+                </form>
+            </div>
+            <div class="col col-sm-6">
+                <form action = "/Result" method="post" id="pie">
+                    <input type="hidden"  name="formid" value="pie" >
+                    <input class="a-btn" type="button"  name="注视点数量扇形图" value="注视点数量扇形图" onclick="this.form.submit()">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <h1 class="titles">注视点统计结果：</h1>
+        <HR class="hr_">
+    </div>
+    <table id="tb" border="3" align="center" cellpadding="11px">
+        <tr>
+            <td>注视点编号</td>
+            <td>注视点所处视频时间</td>
+            <td>注视点x轴坐标</td>
+            <td>注视点y轴坐标</td>
+            <td>注视点种类颜色编号</td>
+            <td>注视点种类</td>
+        </tr>
+    </table>
+</div>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <h1 class="titles">语义分割与注视点图像：</h1>
+        <HR class="hr_">
+    </div>
+    <div class="pic_">
+        <div id="demo" class="carousel slide" data-ride="carousel">
 
-  <!-- 指示符 -->
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-  </ul>
+          <!-- 指示符 -->
+          <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+          </ul>
 
-  <!-- 轮播图片 -->
-  <div class="carousel-inner" id = spin>
-  </div>
+          <!-- 轮播图片 -->
+          <div class="carousel-inner" id = spin>
+          </div>
 
-  <!-- 左右切换按钮 -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
+          <!-- 左右切换按钮 -->
+          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
 
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -100,5 +214,6 @@
 
     }
 </script>
+</div>
 </body>
 </html>

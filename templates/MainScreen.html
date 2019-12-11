@@ -6,24 +6,164 @@
 
     <meta charset="UTF-8">
     <title>Main Page</title>
+    <style type="text/css">
+    .container_2{
+        margin:0 auto;
+        width:500px;
+        height:500px;
+        border: 2px solid #727272;
+        position: absolute;
+        left:0;
+        bottom:0;
+        right:0;
+        top:150px;
+        box-shadow: inset 5px 5px 16px #346a72, inset -5px -5px 5px #486772;
+    }
+    .form_style{
+        margin: 0 auto;
+        width: 420px;
+        height: 350px;
+        position: absolute;
+        top: 50px;
+        left:10px;
+        bottom:0;
+        right:0;
+    }
+    .head{
+        margin: auto;
+        width: 450px;
+        padding-top: 25px;
+        color: #127272;
+        font-family: 'STKaiti';
+    }
+    .span_style{
+        height: 50px;
+        line-height: 20px;
+        float: left;
+        /*font-weight: bolder;*/
+        color: #126660;
+        font-size: 15px;
+        font-family: 'STKaiti';
+    }
+    .input_style_special{
+        height: 50px;
+        float: left;
+        margin-left: 85px;
+    }
+    .input_style{
+        height: 50px;
+        float: left;
+        margin-left: 25px;
+    }
+    .span_style2{
+        height: 30px;
+        line-height: 30px;
+        float: left;
+        margin-top: 30px;
+        /*font-weight: bolder;*/
+        color: #126660;
+        font-size: 15px;
+        font-family: 'STKaiti';
+    }
+    .input_style2{
+        height: 30px;
+        float: left;
+        width: 200px;
+        margin-left: 30px;
+        margin-top: 30px;
+
+    }
+    .container_3{
+        width: 300px;
+        height: 300px;
+    }
+    .input_button{
+        margin-top: 40px;
+        color: lightseagreen;
+    }
+    svg {
+        margin: auto;
+        width: 125px;
+        height: 125px;
+        z-index: 2000;
+    }
+    .mask {
+        margin:auto;
+        width: 125px;
+        height: 125px;
+        background-color: #ffffff;
+    }
+    .container_4{
+        margin-top: 580px;
+        margin-left: 580px;
+        width: 200px;
+        height: 150px;
+    }
+</style>
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <form action="/uploadFile" method='post' enctype="multipart/form-data">
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            视频地址:<input type="file" name="video" id="videoFile">
-            <br>
-            右眼眼动数据地址:<input type="file" name="rData" id="rDataFile">
-            <br>
-            左眼眼动数据地址:<input type="file" name="lData" id="lDataFile">
-            <br>
-            提取间隔(单位/s)：<input type="number" min="0" step="0.01" name="interval" id="interval"> <br>
-            开始时间(单位/s): <input type="number" min="0" step="0.01" name="startTime" id="startTime"> <br>
-            结束时间(单位/s)：<input type="number" min="0" step="0.01" name="finishTime" id="finishTime"> <br>
-            <input type="submit" name="analysis">
-        </form>
+    <div class="head">
+        <h1> 语义分割与注视点统计系统</h1>
     </div>
 </div>
+
+<div class="container_2">
+    <div class="row">
+        <div class="form_style">
+        <form action="/uploadFile" method='post' enctype="multipart/form-data" class="form-horizontal" role="form">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <span class="span_style">视频地址:</span>
+            <input class="input_style_special" type="file" name="video" id="videoFile">
+
+            <span class="span_style">右眼眼动数据地址:</span>
+            <input class="input_style" type="file" name="rData" id="rDataFile">
+            <span class="span_style">左眼眼动数据地址:</span>
+            <input class="input_style" type="file" name="lData" id="lDataFile">
+
+            <span class="span_style2">提取间隔(单位s)：</span>
+            <input class="input_style2" type="number" min="0" step="1" name="interval" id="interval"> <br>
+
+            <span class="span_style2">开始时间(单位s)：</span>
+            <input class="input_style2" type="number" min="0" step="0.01" name="startTime" id="startTime"> <br>
+
+            <span class="span_style2">结束时间(单位s)：</span>
+            <input class="input_style2" type="number" min="0" step="0.01" name="finishTime" id="finishTime"> <br>
+            <div class="container_3">
+                <input class="input_button" type="submit" name="analysis"  onclick="showloading()">
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+<div class="container_4">
+    <div id="mask" class="mask"></div>
+    <div id="loading" hidden="hidden">
+        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" x="0px"
+                 y="0px"
+                 viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+            <path fill="#1E90FF"
+                      d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                    <animateTransform attributeName="transform" attributeType="XML"
+                                      type="rotate"
+                                      dur="1s"
+                                      from="0 50 50"
+                                      to="360 50 50"
+                                      repeatCount="indefinite"/>
+            </path>
+        </svg>
+    </div>
+</div>
+<script type="text/javascript">
+    function cancelloading(){
+        $("#loading").hide();
+        $("#mask").hide();
+    }
+    function showloading(){
+        $("#mask").hide();
+        $("#loading").show();
+    }
+</script>
 </body>
 

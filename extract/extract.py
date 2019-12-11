@@ -77,6 +77,7 @@ class ExtractPictures:
                     while success and count < number:
                         print("start extract the " + str(count+1) + " image")
                         time = cap.get(0)
+
                         time_list.append(round(time/1000, 2))
                         success, image = cap.read()
                         if success:
@@ -119,14 +120,15 @@ class ExtractPictures:
                     count = 0
                     while success and count < number_:
                         print("start extract the " + str(count + 1) + " image")
-                        time = cap.get(0)
-                        time_list.append(round(time/1000, 2))
                         cap.set(cv2.CAP_PROP_POS_MSEC, (1000*initial_extract_time + count*1000*extract_time_interval))
                         success, image = cap.read()
+                        time = cap.get(0)
                         if success:
                             cv2.imwrite(os.path.join(path_out, "{}_{:06d}.jpg".format(output_prefix, count + 1)), image,
                                         [int(cv2.IMWRITE_JPEG_QUALITY), jpg_quality])
                             count += 1
+                            # 浮点数四舍五入两位
+                            time_list.append(round(time / 1000, 2))
                     return time_list
                 # 如果开始或者结束时间为空就连续帧全部输出
                 else:

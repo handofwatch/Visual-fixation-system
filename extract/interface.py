@@ -28,7 +28,8 @@ def analysis_for_video(path):
     switch_case(_str, path, result_path)
     analysis(result_path)
 
-#该函数拆分为了两个，原函数用来得出视频信息，拆出来的函数用来调用第二组工作
+
+# 该函数拆分为了两个，原函数用来得出视频信息，拆出来的函数用来调用第二组工作
 def switch_case(choose, path, result_path):
     time_list = []
     if choose == "1":
@@ -129,7 +130,8 @@ def switch_case(choose, path, result_path):
     # print("This is time_list:")
     # print(time_list)
 
-#用来向后端传递用户输入
+
+# 用来向后端传递用户输入
 def pass_input(start_time, end_time, interval, path, result_path):
     time_list = e.ExtractPictures.video_frames(
                 path_in=path,
@@ -145,6 +147,6 @@ def pass_input(start_time, end_time, interval, path, result_path):
 
     return time_list
 
-
-if __name__ == '__main__':
-    analysis_for_video("/Users/apple/Documents/GitHub/Visual-fixation-system/output/test.mp4")
+#
+# if __name__ == '__main__':
+#     analysis_for_video("/Users/apple/Documents/GitHub/Visual-fixation-system/output/test.mp4")
