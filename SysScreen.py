@@ -15,6 +15,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'upload'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 basedir = os.path.abspath(os.path.dirname(__file__))
+pic_num = 1
 
 app.config['SECRET_KEY'] = 'secret string'
 
@@ -52,7 +53,13 @@ def upload_file():
     result_sum = []
     if request.method == 'POST':
         # 清空原本文件夹
-        clean_file()
+        if os.path.exists('upload'):
+            shutil.rmtree('upload')
+        os.mkdir('upload')
+        os.mkdir('upload/images')
+        if os.path.exists('static'):
+            shutil.rmtree('static')
+        os.mkdir('static')
 
         # 获得用户上传文件，并把他们放进服务器特定位置，并改为特定名字
         video_file = request.files['video']
@@ -98,8 +105,12 @@ def upload_file():
 
         # 得出time_list
         time_list = extract.interface.pass_input(start_time, end_time, interval, video_path, result_path)
-        print("========")
-        print(time_list)
+
+        pict_num = len(time_list)
+        global pic_num
+        pic_num = pict_num
+        print('========================')
+        print(pic_num)
 
         # 分析图片
         extract.interface.analysis(result_path)
@@ -122,7 +133,6 @@ def upload_file():
         ui_bar(name, data)
         ui_pie(name, data)
 
-        pict_num = len(time_list)
         # 为图片分配url
         for i in range(0, pict_num):
             num = str(i)
@@ -133,16 +143,19 @@ def upload_file():
 
     return render_template('MainScreen.html')
 
-
-def clean_file():
-    if os.path.exists('upload'):
-        shutil.rmtree('upload')
-    os.mkdir('upload')
-    os.mkdir('upload/images')
-    if os.path.exists('static'):
-        shutil.rmtree('static')
-    os.mkdir('static')
-
+@app.route('/show_progress')
+def show_progress():
+    num = 0
+    path = os.path.join(basedir, 'upload/images')
+    file_list = os.listdir(path)
+    for i in range(0, len(file_list)):
+        num = num + 1
+    print('========================')
+    print(num)
+    progress = (num - pic_num)/pic_num
+    print(progress)
+    progress = str(progress * 100)
+    return progress
 
 if __name__ == '__main__':
     app.run()
