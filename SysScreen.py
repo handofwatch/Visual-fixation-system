@@ -149,7 +149,9 @@ def show_progress():
     path = os.path.join(basedir, 'upload/images')
     file_list = os.listdir(path)
     for i in range(0, len(file_list)):
-        num = num + 1
+        file_path = os.path.join(path,file_list[i] )
+        if os.path.isfile(file_path):
+            num = num + 1
     print('========================')
     print(num)
     progress = (num - pic_num)/pic_num
