@@ -147,14 +147,13 @@
         <div id="demo" class="carousel slide" data-ride="carousel">
 
           <!-- 指示符 -->
-          <ul class="carousel-indicators">
-            <li data-target="#demo" data-slide-to="0" class="active"></li>
-            <li data-target="#demo" data-slide-to="1"></li>
-            <li data-target="#demo" data-slide-to="2"></li>
+          <ul class="carousel-indicators" id="indicator">
+
           </ul>
 
           <!-- 轮播图片 -->
           <div class="carousel-inner" id = spin>
+
           </div>
 
           <!-- 左右切换按钮 -->
@@ -190,18 +189,27 @@
         console.log(pict_num);
         var div_dict = {};
         var img_dict = {};
+        var indicator_dict = {};
         //为轮播动态生成图片
         for(var k = 0; k < pict_num; k++){
 
+            indicator_dict[k] = document.createElement("li");
             div_dict[k] = document.createElement("div");
             if(k === 0){
                 div_dict[k].className = 'carousel-item active';
+                indicator_dict[k].setAttribute('class', 'active')
             }
             else{
                 div_dict[k].className = 'carousel-item';
             }
             div_dict[k].id = 'spanitem' + k;
+            indicator_dict[k].setAttribute('data-target','#demo');
+            indicator_dict[k].setAttribute('data-slide-to',k);
+
+            var indicator = document.getElementById("indicator");
             var dom = document.getElementById("spin");
+
+            indicator.appendChild(indicator_dict[k]);
             dom.appendChild(div_dict[k]);
             img_dict[k] = document.createElement("img");
             img_dict[k].src = "/static/result_images" + k + ".png";

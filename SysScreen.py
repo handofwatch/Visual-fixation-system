@@ -109,10 +109,10 @@ def upload_file():
 
         # test
         point_list = result[0]
-        # point_list = [[0, 0.0, 1219, 503, '#FF0652', 'table'], [1, 0.03, 1219, 503, '#FF0652', 'table']]
+        #point_list = [[0, 0.0, 1219, 503, '#FF0652', 'table'], [1, 0.03, 1219, 503, '#FF0652', 'table']]
 
         result_sum = result[1]
-        # result_sum = {'table': 2}
+        #result_sum = {'table': 2}
         # resultSum = {'chair': 55, 'wall': 395, 'table': 441, 'box': 2,
         #              'person;individual;someone;somebody;mortal;soul': 6,
         #              'bag': 1, 'desk': 4, 'food;solid;food': 4, 'painting;picture': 4, 'book': 27}
@@ -135,10 +135,12 @@ def upload_file():
 
 
 def clean_file():
-    shutil.rmtree('upload')
+    if os.path.exists('upload'):
+        shutil.rmtree('upload')
     os.mkdir('upload')
     os.mkdir('upload/images')
-    shutil.rmtree('static')
+    if os.path.exists('static'):
+        shutil.rmtree('static')
     os.mkdir('static')
 
 
