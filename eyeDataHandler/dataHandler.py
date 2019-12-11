@@ -6,7 +6,7 @@ from eyeDataHandler import getEyeData as g
 # 当前模块的路径
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # 截取的图片时间序列（从前面传进来）
-img_time_list = [1.0, 7.7, 13.4]
+test_img_time_list = [1.0, 7.7, 13.4]
 # 生成语义分割好的图片的文件夹位置
 result_pic_path = os.path.normpath(os.path.join(base_dir, "../upload/images"))
 # 左右眼数据位置
@@ -25,7 +25,10 @@ def read_result_imgs(result_path):
         if str(filename)[-2] == 'n':
             img = cv2.imread(result_path + "/" + filename)
             result_img_list.append(img)
-    return result_img_list
+    if len(result_img_list) == 0:
+        raise FileNotFoundError(f'Output images can\'t be found in {result_path}!')
+    else:
+        return result_img_list
 
 
 # 核心函数，输入时间序列，输出注释点的详细信息序列和注视点统计字典
@@ -44,11 +47,11 @@ def handle_result_img(img_time_list, left_eye_data_path, right_eye_data_path):
         point = points[point_id]
         height = result_img_list[i].shape[0]
         width = result_img_list[i].shape[1]
-        result_img_list[i] = paint_point(result_img_list[i], [point[0], point[1]], 30, (0, 0, 255), 0.9)
+        result_img_list[i] = paint_point(result_img_list[i], [point[0], point[1]], 15, (0, 0, 255), 0.8)
         color = result_img_list[i][int(point[1]*height/288)][int(point[0]*width/768 + width/2)]
         hex_color = rgb2hex([color[2], color[1], color[0]])
         # 裁剪结果图片，取左半边
-        result_img_list[i] = result_img_list[i][:, 0:int(width/2)]
+        #result_img_list[i] = result_img_list[i][:, 0:int(width/2)]
         print(hex_color)
         if hex_color in tag_dict:
             tag = tag_dict[hex_color]
@@ -80,6 +83,7 @@ def find_nearest_time(t, array):
 def paint_point(img, position, radius, color, alpha):
     img_copy = img.copy()
     cv2.circle(img, (int(position[0]), int(position[1])), radius, color, -1)
+    cv2.circle(img, (int(position[0]), int(position[1])), radius, (0, 0, 0), 1)
     img_new = cv2.addWeighted(img, alpha, img_copy, 1-alpha, 0)
     return img_new
 
@@ -134,5 +138,22 @@ def get_color_dict(tag_path):
     return tag_dict
 
 
-# 注视点点的详细信息，结果字典，原图片集，加了注视点的图片集
-# points_detail, result_dict = handle_result_img(img_time_list, '/Users/engine/Desktop/Visual-fixation-system/eyeData/left.txt', '/Users/engine/Desktop/Visual-fixation-system/eyeData/right.txt')
+def draw_tracing(points, img_path):
+    img = cv2.imread(img_path)
+    for i, point in enumerate(points):
+        img = paint_point(img, (point[0], point[1]), 5, (0, 0, 250), 0.7)
+        #if i > 0 and points[i-1] != [-1, -1] and points[i] != [-1, -1]:
+        #    print((points[i-1][0], points[i-1][1]), (points[i][0], points[i][1]))
+        #    img = paint_line(img, (points[i-1][0], points[i-1][1]), (points[i][0], points[i][1]), 3, (250, 0, 0), 0.7)
+    write_path = os.path.join(base_dir, '../static/')
+    cv2.imwrite(write_path + "tracing.png", img)
+
+
+# 注视点点的详细信息，结果字典
+#points_detail, result_dict = handle_result_img(test_img_time_list, '/Users/engine/Desktop/Visual-fixation-system/eyeData/left.txt', '/Users/engine/Desktop/Visual-fixation-system/eyeData/right.txt')
+#point_time_list, points = g.align_two_eyes('/Users/engine/Desktop/Visual-fixation-system/eyeData/left.txt', '/Users/engine/Desktop/Visual-fixation-system/eyeData/right.txt')
+#points = g.wash_data(points, allow_delta)
+#draw_tracing(points, "/Users/engine/Desktop/Visual-fixation-system/eyeDataHandler/demo.jpg")
+
+# 注视点的详细信息，结果字典，原图片集，加了注视点的图片集
+#points_detail, result_dict = handle_result_img(test_img_time_list, '/Users/engine/Desktop/Visual-fixation-system/eyeData/left.txt', '/Users/engine/Desktop/Visual-fixation-system/eyeData/right.txt')
